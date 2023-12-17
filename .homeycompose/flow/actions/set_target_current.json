@@ -1,0 +1,24 @@
+{
+    "id": "set_target_current",
+    "title": {
+        "en": "Limit the active carger current",
+        "sv": "Begränsa den aktiva strom"
+    },
+    "titleFormatted": {
+        "en": "Limit the active current to current [[current]]",
+        "sv": "Begränsa den aktiva strom till current [[current]]"
+    },
+    "args": [
+        {
+            "name": "current",
+            "type": "number",
+            "title": {
+                "en": "current (A)",
+                "sv": "current (A)"
+            },
+            "min": 6,
+            "max": 32,
+            "step": 0.5
+        }
+    ]
+}

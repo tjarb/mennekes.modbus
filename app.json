@@ -1,0 +1,948 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "mennekes.modbus",
+  "sdk": 3,
+  "version": "0.0.1",
+  "compatibility": ">=5.0.0",
+  "name": {
+    "en": "Mennekes Amtron"
+  },
+  "description": {
+    "en": "My car. My energy."
+  },
+  "category": "energy",
+  "tags": {
+    "en": [
+      "mennekes",
+      "charger",
+      "pv",
+      "energy",
+      "modbus"
+    ]
+  },
+  "author": {
+    "name": "Tjarco Boerkoel",
+    "email": "TODO"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Tjarco Boerkoel",
+        "email": "TODO"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "TODO"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://TODO"
+  },
+  "source": "https://TODO",
+  "homeyCommunityTopicId": 0,
+  "images": {
+    "large": "./assets/images/large.png",
+    "small": "./assets/images/small.png"
+  },
+  "brandColor": "#015a93",
+  "dependencies": {
+    "net": "*"
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "charger_condition_changed",
+        "title": {
+          "en": "Condition changed",
+          "nl": "Staat gewijzigd",
+          "sv": "Tillstånd ändrad"
+        },
+        "titleFormatted": {
+          "en": "Condition changed to [[charger_condition]]",
+          "sv": "Tillstånd ändrades till [[charger_condition]]"
+        },
+        "tokens": [
+          {
+            "name": "charger_condition",
+            "type": "string",
+            "title": {
+              "en": "Condition",
+              "nl": "Staat",
+              "sv": "Tillstånd"
+            },
+            "example": {
+              "en": "Ok"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=inverter"
+          }
+        ]
+      },
+      {
+        "id": "charger_status_changed",
+        "title": {
+          "en": "Operational Status Changed",
+          "nl": "Operationele status gewijzigd",
+          "sv": "Operationell status ändrad"
+        },
+        "titleFormatted": {
+          "en": "Operational status changed to [[charger_status]]",
+          "sv": "Operationell status ändrades till [[charger_status]]"
+        },
+        "tokens": [
+          {
+            "name": "charger_status",
+            "type": "string",
+            "title": {
+              "en": "Operational Status",
+              "nl": "Operationele status",
+              "sv": "Operationell status"
+            },
+            "example": {
+              "en": "Occupied"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=inverter"
+          }
+        ]
+      },
+      {
+        "id": "phase_threshold_triggered",
+        "title": {
+          "en": "Phase utilization alert",
+          "sv": "Fasöverbelastning"
+        },
+        "titleFormatted": {
+          "en": "Phase [[phase]] is utilized to [[percentageUtilized]]%",
+          "sv": "Fas [[phase]] är utnyttjad till [[percentageUtilized]]%"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=energy"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "phase",
+            "type": "string",
+            "title": {
+              "en": "Phase",
+              "sv": "Fas"
+            },
+            "example": {
+              "en": "L1"
+            }
+          },
+          {
+            "name": "percentageUtilized",
+            "type": "number",
+            "title": {
+              "en": "Utilized (%)",
+              "sv": "Utnyttjad (%)"
+            },
+            "example": {
+              "en": "98"
+            }
+          }
+        ]
+      },
+      {
+        "id": "changedOperationalStatus",
+        "title": {
+          "en": "Status changed",
+          "nl": "Status gewijzigd",
+          "sv": "Status ändrad"
+        },
+        "titleFormatted": {
+          "en": "Status changed to [[status]]",
+          "sv": "Status ändrades till [[status]]"
+        },
+        "tokens": [
+          {
+            "name": "status",
+            "type": "string",
+            "title": {
+              "en": "Operational Status",
+              "nl": "Operationele status",
+              "sv": "Operationell status"
+            },
+            "example": "Occupied"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=storage"
+          }
+        ]
+      },
+      {
+        "id": "changedBattery",
+        "title": {
+          "en": "Battery charge changed",
+          "nl": "Batterij lading gewijzigd",
+          "sv": "Batteriladdning ändrad"
+        },
+        "titleFormatted": {
+          "en": "Battery charge changed to [[charge]]%",
+          "sv": "Batteriladdning ändrades till [[charge]]%"
+        },
+        "tokens": [
+          {
+            "name": "charge",
+            "type": "number",
+            "title": {
+              "en": "Battery Charge (%)",
+              "nl": "Batterij lading (%)",
+              "sv": "Batteriladdning (%)"
+            },
+            "example": 66
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=storage"
+          }
+        ]
+      },
+      {
+        "id": "changedBatteryCharging",
+        "title": {
+          "en": "Battery charging changed (W)",
+          "nl": "Batterij opladen gewijzigd (W)",
+          "sv": "Batteriladdning ändrad (W)"
+        },
+        "titleFormatted": {
+          "en": "Battery charging changed to [[charging]]W",
+          "sv": "Batteriladdning ändrades till [[charging]]W"
+        },
+        "tokens": [
+          {
+            "name": "charging",
+            "type": "number",
+            "title": {
+              "en": "Battery Charging (W)",
+              "nl": "Batterij opladen (W)",
+              "sv": "Batteriladdning effekt (W)"
+            },
+            "example": 1337
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=storage"
+          }
+        ]
+      },
+      {
+        "id": "changedPowerDrawn",
+        "title": {
+          "en": "Power drawn changed (W)",
+          "nl": "Stroom afname gewijzigd (W)",
+          "sv": "Effekt uttagen ändrad (W)"
+        },
+        "titleFormatted": {
+          "en": "Power drawn changed to [[drawn]]W",
+          "sv": "Effekt uttagen ändrades till [[drawn]]W"
+        },
+        "tokens": [
+          {
+            "name": "drawn",
+            "type": "number",
+            "title": {
+              "en": "Power Drawn (W)",
+              "nl": "Stroom afname (W)",
+              "sv": "Effekt uttagen (W)"
+            },
+            "example": 303
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=storage"
+          }
+        ]
+      },
+      {
+        "id": "changedCurrent",
+        "title": {
+          "en": "Charge current changed (A)",
+          "nl": "Charge current changed (A)",
+          "sv": "Charge current changed (A)"
+        },
+        "titleFormatted": {
+          "en": "Charge current changed [[current]]A",
+          "sv": "Charge current changed [[current]]A"
+        },
+        "tokens": [
+          {
+            "name": "current",
+            "type": "number",
+            "title": {
+              "en": "Charge current (A)",
+              "nl": "Charge current (A)",
+              "sv": "Charge current (A)"
+            },
+            "example": 42
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=storage"
+          }
+        ]
+      },
+      {
+        "id": "changedCurrentLimit",
+        "title": {
+          "en": "Charge current limit changed (A)",
+          "nl": "Charge current limit changed (A)",
+          "sv": "Charge current limit changed (A)"
+        },
+        "titleFormatted": {
+          "en": "Charge current limit changed [[current]]A",
+          "sv": "Charge current limit changed [[current]]A"
+        },
+        "tokens": [
+          {
+            "name": "current",
+            "type": "number",
+            "title": {
+              "en": "Charge current limit (A)",
+              "nl": "Charge current limit (A)",
+              "sv": "Charge current limit (A)"
+            },
+            "example": 31
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=storage"
+          }
+        ]
+      },
+      {
+        "id": "changedYield",
+        "title": {
+          "en": "Energy yield changed to (kW)",
+          "nl": "Energy yield changed to (kW)",
+          "sv": "Energy yield changed to (kW)"
+        },
+        "titleFormatted": {
+          "en": "Energy yield changed to [[yield]]kW",
+          "sv": "Energy yield changed to  [[yield]]kW"
+        },
+        "tokens": [
+          {
+            "name": "yield",
+            "type": "number",
+            "title": {
+              "en": "Energy yield (kW)",
+              "nl": "Energy yield (kW)",
+              "sv": "Energy yield(kW)"
+            },
+            "example": 1021
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=storage"
+          }
+        ]
+      },
+      {
+        "id": "changedBatteryCapacity",
+        "title": {
+          "en": "Battery capacity changed (%)",
+          "nl": "Batterij capaciteit gewijzigd (%)",
+          "sv": "Batterladdning ändrad (%)"
+        },
+        "titleFormatted": {
+          "en": "Battery capacity changed to [[capacity]]%",
+          "sv": "Batterladdning ändrades till [[capacity]]%"
+        },
+        "tokens": [
+          {
+            "name": "capacity",
+            "type": "number",
+            "title": {
+              "en": "Battery Capacity (%)",
+              "nl": "Batterij capaciteit (%)",
+              "sv": "Batteriladdning (%)"
+            },
+            "example": 42
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=storage"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "anyPhaseUtilized",
+        "title": {
+          "en": "Any phase utilized !{{above|below}}",
+          "sv": "Någon fas är utnyttjad !{{över|under}}"
+        },
+        "titleFormatted": {
+          "en": "Any phase is utilized !{{above|below}} [[utilization]]%",
+          "sv": "Någon fas är utnyttjad !{{över|under}} [[utilization]]%"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=energy"
+          },
+          {
+            "name": "utilization",
+            "type": "number",
+            "title": {
+              "en": "Utilization (%)",
+              "sv": "Utnyttjad (%)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "isInverterDailyYield",
+        "title": {
+          "en": "Daily yield is !{{|not}} above",
+          "sv": "Dagens produktion är !{{|inte}} mer än"
+        },
+        "titleFormatted": {
+          "en": "Daily yield is !{{|not}} above [[daily_yield]]",
+          "sv": "Dagens produktion är !{{|inte}} mer än [[daily_yield]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=inverter"
+          },
+          {
+            "name": "daily_yield",
+            "type": "number",
+            "title": {
+              "en": "Daily yield (kWh)",
+              "sv": "Dagens produktion (kWh)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "isInverterStatus",
+        "title": {
+          "en": "Operational status !{{contains|doesn't contain}}",
+          "sv": "Operationell status innehåller !{{|inte}}"
+        },
+        "titleFormatted": {
+          "en": "Operational status !{{contains|doesn't contain}} [[inverter_status]]",
+          "sv": "Operationell status innehåller !{{|inte}} [[inverter_status]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=inverter"
+          },
+          {
+            "name": "inverter_status",
+            "type": "text",
+            "title": {
+              "en": "Operational status",
+              "sv": "Operationell status"
+            }
+          }
+        ]
+      },
+      {
+        "id": "phaseUtilized",
+        "title": {
+          "en": "A phase utilized !{{above|below}}",
+          "sv": "En fas är utnyttjad !{{över|under}}"
+        },
+        "titleFormatted": {
+          "en": "Phase [[phase]] is utilized !{{above|below}} [[utilization]]%",
+          "sv": "Fas [[phase]] är utnyttjad !{{över|under}} [[utilization]]%"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=energy"
+          },
+          {
+            "name": "phase",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "L1",
+                "label": {
+                  "en": "L1",
+                  "sv": "L1"
+                }
+              },
+              {
+                "id": "L2",
+                "label": {
+                  "en": "L2",
+                  "sv": "L2"
+                }
+              },
+              {
+                "id": "L3",
+                "label": {
+                  "en": "L3",
+                  "sv": "L3"
+                }
+              }
+            ]
+          },
+          {
+            "name": "utilization",
+            "type": "number",
+            "title": {
+              "en": "Utilization (%)",
+              "sv": "Utnyttjad (%)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "power_condition",
+        "title": {
+          "en": "Power is !{{below|above}}",
+          "sv": "Effekt är !{{under|över}}"
+        },
+        "titleFormatted": {
+          "en": "Power is !{{below|above}} [[power]]",
+          "sv": "Effekt är !{{under|över}} [[power]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=inverter"
+          },
+          {
+            "name": "power",
+            "type": "number",
+            "title": {
+              "en": "Power (W)",
+              "sv": "Effekt (W)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "isOperationalStatus",
+        "title": {
+          "en": "Operational status !{{is|is not}}",
+          "nl": "Operationele status !{{is|is niet}}",
+          "sv": "Operationell status !{{är|är inte}}"
+        },
+        "titleFormatted": {
+          "en": "Operational status !{{is|is not}} [[status]]",
+          "nl": "Operationele status !{{is|is niet}} [[status]]",
+          "sv": "Operationell status !{{är|är inte}} [[status]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=storage"
+          },
+          {
+            "name": "status",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "303",
+                "label": {
+                  "en": "Off",
+                  "nl": "Uit",
+                  "sv": "Off"
+                }
+              },
+              {
+                "id": "2291",
+                "label": {
+                  "en": "Battery Standby",
+                  "nl": "Batterij standby",
+                  "sv": "Batteri standby"
+                }
+              },
+              {
+                "id": "2292",
+                "label": {
+                  "en": "Battery Charging",
+                  "nl": "Batterij opladen",
+                  "sv": "Batteri laddas"
+                }
+              },
+              {
+                "id": "2293",
+                "label": {
+                  "en": "Battery Discharging",
+                  "nl": "Batterij ontladen",
+                  "sv": "Batteri urladdas"
+                }
+              },
+              {
+                "id": "16777213",
+                "label": {
+                  "en": "Information Not Available",
+                  "nl": "Informatie Niet Beschikbaar",
+                  "sv": "Information inte tillgänglig"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "set_target_current",
+        "title": {
+          "en": "Limit the active carger current",
+          "sv": "Begränsa den aktiva strom"
+        },
+        "titleFormatted": {
+          "en": "Limit the active current to current [[current]]",
+          "sv": "Begränsa den aktiva strom till current [[current]]"
+        },
+        "args": [
+          {
+            "name": "current",
+            "type": "number",
+            "title": {
+              "en": "current (A)",
+              "sv": "current (A)"
+            },
+            "min": 6,
+            "max": 32,
+            "step": 0.5
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Mennekes Amtron",
+        "nl": "Mennekes Amtron",
+        "sv": "Mennekes Amtron"
+      },
+      "images": {
+        "large": "drivers/storage/assets/images/large.png",
+        "small": "drivers/storage/assets/images/small.png"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "operational_status",
+        "battery",
+        "measure_power.charge",
+        "power_drawn",
+        "battery_capacity",
+        "charge_current",
+        "charge_limit",
+        "measure_yield"
+      ],
+      "capabilitiesOptions": {
+        "measure_power.charge": {
+          "title": {
+            "en": "Charge",
+            "nl": "Opladen",
+            "sv": "Laddning"
+          }
+        },
+        "measure_power.discharge": {
+          "title": {
+            "en": "Discharge",
+            "nl": "Ontladen",
+            "sv": "Urladdning"
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "start"
+        }
+      ],
+      "id": "storage",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Mennekes Amtron settings",
+            "nl": "Mennekes Amtron instellingen",
+            "sv": "Mennekes Amtron inställningar"
+          },
+          "children": [
+            {
+              "id": "address",
+              "type": "text",
+              "value": "0.0.0.0",
+              "label": {
+                "en": "IP Address",
+                "nl": "IP adres",
+                "sv": "IP adress"
+              }
+            },
+            {
+              "id": "port",
+              "type": "number",
+              "value": 502,
+              "step": 1,
+              "label": {
+                "en": "Port",
+                "nl": "Poort",
+                "sv": "Port"
+              }
+            },
+            {
+              "id": "polling",
+              "type": "number",
+              "value": 1,
+              "step": 0.5,
+              "attr": {
+                "min": 0.5,
+                "max": 5
+              },
+              "label": {
+                "en": "Polling",
+                "nl": "Polling",
+                "sv": "Uppdateringsfrekvens"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "battery": {
+      "type": "number",
+      "title": {
+        "en": "Session Charged",
+        "nl": "Sessie geladen",
+        "sv": "Batteriladdning"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/battery.svg",
+      "units": {
+        "en": "kWh",
+        "nl": "kWh",
+        "sv": "kWh"
+      }
+    },
+    "battery_capacity": {
+      "type": "number",
+      "title": {
+        "en": "Energy required",
+        "nl": "Energy required",
+        "sv": "Energy required"
+      },
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/battery_capacity.svg",
+      "units": {
+        "en": "kWh",
+        "nl": "kWh",
+        "sv": "kWh"
+      }
+    },
+    "charge_current": {
+      "type": "number",
+      "title": {
+        "en": "Charge current",
+        "nl": "Laad stroom",
+        "sv": "Cahrge current"
+      },
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/battery_capacity.svg",
+      "units": {
+        "en": "A",
+        "nl": "A",
+        "sv": "A"
+      }
+    },
+    "charge_limit": {
+      "type": "number",
+      "title": {
+        "en": "Charge current limit",
+        "nl": "Laad stroom limiet",
+        "sv": "Cahrge current limit"
+      },
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/battery_capacity.svg",
+      "units": {
+        "en": "A",
+        "nl": "A",
+        "sv": "A"
+      }
+    },
+    "connected": {
+      "title": {
+        "en": "Connected",
+        "sv": "Uppkopplad"
+      },
+      "type": "boolean",
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/connected.svg"
+    },
+    "measure_yield": {
+      "type": "number",
+      "title": {
+        "en": "Lifetime Yield",
+        "nl": "Totale opbrengst",
+        "sv": "Lifstid produktion"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/total_yield.svg",
+      "units": {
+        "en": "kWh",
+        "nl": "kWh",
+        "sv": "kWh"
+      }
+    },
+    "operational_status": {
+      "type": "string",
+      "title": {
+        "en": "Status",
+        "nl": "Status",
+        "sv": "Status"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/operational_status.svg"
+    },
+    "power_drawn": {
+      "type": "number",
+      "title": {
+        "en": "Grid Power",
+        "nl": "Stroom afname",
+        "sv": "Effekt uttagen"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/power_drawn.svg",
+      "units": {
+        "en": "kW",
+        "nl": "kW",
+        "sv": "kW"
+      }
+    },
+    "power_grid": {
+      "type": "number",
+      "title": {
+        "en": "Grid power",
+        "sv": "Elnät"
+      },
+      "insights": false,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/grid.svg",
+      "units": {
+        "en": "kW",
+        "nl": "kW",
+        "sv": "kW"
+      }
+    },
+    "power_self": {
+      "type": "number",
+      "title": {
+        "en": "Consumption",
+        "sv": "Konsumtion"
+      },
+      "insights": false,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/house.svg",
+      "units": {
+        "en": "W",
+        "nl": "W",
+        "sv": "W"
+      }
+    },
+    "target_power": {
+      "title": {
+        "en": "Target current limit",
+        "nl": "Target current limit",
+        "sv": "Högsta tillåtna effekt"
+      },
+      "type": "number",
+      "desc": {
+        "en": "The charger active current limit",
+        "nl": "The charger active current limit",
+        "sv": "Växelriktarens aktiva effekt gräns"
+      },
+      "min": 6,
+      "max": 32,
+      "decimals": 0,
+      "step": 1,
+      "units": {
+        "en": "W"
+      },
+      "setable": true,
+      "getable": true,
+      "insights": true,
+      "uiComponent": "slider",
+      "chartType": "stepLine"
+    }
+  }
+}

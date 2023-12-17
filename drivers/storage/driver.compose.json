@@ -1,0 +1,44 @@
+{
+  "name": {
+    "en": "Mennekes Amtron",
+    "nl": "Mennekes Amtron",
+    "sv": "Mennekes Amtron"
+  },
+  "images": {
+    "large": "drivers/storage/assets/images/large.png",
+    "small": "drivers/storage/assets/images/small.png"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "operational_status",
+    "battery",
+    "measure_power.charge",
+    "power_drawn",
+    "battery_capacity",
+	"charge_current",
+	"charge_limit",
+	"measure_yield"
+	
+  ],
+  "capabilitiesOptions": {
+    "measure_power.charge": {
+      "title": {
+        "en": "Charge",
+        "nl": "Opladen",
+        "sv": "Laddning"
+      }
+    },
+    "measure_power.discharge": {
+      "title": {
+        "en": "Discharge",
+        "nl": "Ontladen",
+        "sv": "Urladdning"
+      }
+    }
+  },
+  "pair": [
+    {
+      "id": "start"
+    }
+  ]
+}

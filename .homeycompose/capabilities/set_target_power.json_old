@@ -1,0 +1,28 @@
+{
+    "id": "set_target_power",
+    "title": {
+        "en": "Limit the active power output",
+        "sv": "Begränsa den aktiva effekten"
+    },
+    "titleFormatted": {
+        "en": "Limit the active power output to [[power]]",
+        "sv": "Begränsa den aktiva effekten till [[power]]"
+    },
+    "args": [
+        {
+            "name": "power",
+            "type": "number",
+            "title": {
+                "en": "Power (W)",
+                "sv": "Effekt (W)"
+            },
+            "min": 0,
+            "max": 655360,
+            "step": 1
+        },
+        {
+            "name": "device",
+            "type": "device"
+        }
+    ]
+}

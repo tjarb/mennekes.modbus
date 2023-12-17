@@ -1,0 +1,54 @@
+{
+  "id": "mennekes.modbus",
+  "sdk": 3,
+  "version": "0.0.1",
+  "compatibility": ">=5.0.0",
+  "name": {
+    "en": "Mennekes Amtron"
+  },
+  "description": {
+    "en": "My car. My energy."
+  },
+  "category": "energy",
+  "tags": {
+    "en": [
+      "mennekes",
+	  "charger",
+      "pv",
+      "energy",
+      "modbus"
+    ]
+  },
+  "author": {
+    "name": "Tjarco Boerkoel",
+    "email": "TODO"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Tjarco Boerkoel",
+        "email": "TODO"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "TODO"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://TODO"
+  },
+  "source": "https://TODO",
+  "homeyCommunityTopicId": 0,
+  "images": {
+    "large": "./assets/images/large.png",
+    "small": "./assets/images/small.png"
+  },
+  "brandColor": "#015a93",
+  "dependencies": {
+    "net": "*"
+  }
+}

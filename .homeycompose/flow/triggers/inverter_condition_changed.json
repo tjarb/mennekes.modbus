@@ -1,0 +1,33 @@
+{
+    "id": "charger_condition_changed",
+    "title": {
+        "en": "Condition changed",
+        "nl": "Staat gewijzigd",
+        "sv": "Tillstånd ändrad"
+    },
+    "titleFormatted": {
+        "en": "Condition changed to [[charger_condition]]",
+        "sv": "Tillstånd ändrades till [[charger_condition]]"
+    },
+    "tokens": [
+        {
+            "name": "charger_condition",
+            "type": "string",
+            "title": {
+                "en": "Condition",
+                "nl": "Staat",
+                "sv": "Tillstånd"
+            },
+            "example": {
+                "en": "Ok"
+            }
+        }
+    ],
+    "args": [
+      {
+        "type": "device",
+        "name": "device",
+        "filter": "driver_id=inverter"
+      }
+    ]
+}

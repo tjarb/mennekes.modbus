@@ -1,0 +1,25 @@
+{
+    "title": {
+        "en": "Target current limit",
+		"nl": "Target current limit",
+        "sv": "Högsta tillåtna effekt"
+    },
+    "type": "number",
+    "desc": {
+        "en": "The charger active current limit",
+		"nl": "The charger active current limit",
+        "sv": "Växelriktarens aktiva effekt gräns"
+    },
+    "min": 6,
+    "max": 32,
+    "decimals": 0,
+    "step": 1,
+    "units": {
+        "en": "W"
+    },
+    "setable": true,
+    "getable": true,
+    "insights": true,
+    "uiComponent": "slider",
+    "chartType": "stepLine"
+}

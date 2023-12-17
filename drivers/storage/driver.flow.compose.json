@@ -1,0 +1,260 @@
+{
+  "triggers": [
+    {
+      "id": "changedOperationalStatus",
+      "title": {
+        "en": "Status changed",
+        "nl": "Status gewijzigd",
+        "sv": "Status ändrad"
+      },
+      "titleFormatted": {
+        "en": "Status changed to [[status]]",
+        "sv": "Status ändrades till [[status]]"
+      },
+      "tokens": [
+        {
+          "name": "status",
+          "type": "string",
+          "title": {
+            "en": "Operational Status",
+            "nl": "Operationele status",
+            "sv": "Operationell status"
+          },
+          "example": "Occupied"
+        }
+      ]
+    },
+    {
+      "id": "changedBattery",
+      "title": {
+        "en": "Battery charge changed",
+        "nl": "Batterij lading gewijzigd",
+        "sv": "Batteriladdning ändrad"
+      },
+      "titleFormatted": {
+        "en": "Battery charge changed to [[charge]]%",
+        "sv": "Batteriladdning ändrades till [[charge]]%"
+      },
+      "tokens": [
+        {
+          "name": "charge",
+          "type": "number",
+          "title": {
+            "en": "Battery Charge (%)",
+            "nl": "Batterij lading (%)",
+            "sv": "Batteriladdning (%)"
+          },
+          "example": 66
+        }
+      ]
+    },
+    {
+      "id": "changedBatteryCharging",
+      "title": {
+        "en": "Battery charging changed (W)",
+        "nl": "Batterij opladen gewijzigd (W)",
+        "sv": "Batteriladdning ändrad (W)"
+      },
+      "titleFormatted": {
+        "en": "Battery charging changed to [[charging]]W",
+        "sv": "Batteriladdning ändrades till [[charging]]W"
+      },
+      "tokens": [
+        {
+          "name": "charging",
+          "type": "number",
+          "title": {
+            "en": "Battery Charging (W)",
+            "nl": "Batterij opladen (W)",
+            "sv": "Batteriladdning effekt (W)"
+          },
+          "example": 1337
+        }
+      ]
+    },
+    {
+      "id": "changedPowerDrawn",
+      "title": {
+        "en": "Power drawn changed (W)",
+        "nl": "Stroom afname gewijzigd (W)",
+        "sv": "Effekt uttagen ändrad (W)"
+      },
+      "titleFormatted": {
+        "en": "Power drawn changed to [[drawn]]W",
+        "sv": "Effekt uttagen ändrades till [[drawn]]W"
+      },
+      "tokens": [
+        {
+          "name": "drawn",
+          "type": "number",
+          "title": {
+            "en": "Power Drawn (W)",
+            "nl": "Stroom afname (W)",
+            "sv": "Effekt uttagen (W)"
+          },
+          "example": 303
+        }
+      ]
+    },
+	{
+      "id": "changedCurrent",
+      "title": {
+        "en": "Charge current changed (A)",
+        "nl": "Charge current changed (A)",
+        "sv": "Charge current changed (A)"
+      },
+      "titleFormatted": {
+        "en": "Charge current changed [[current]]A",
+        "sv": "Charge current changed [[current]]A"
+      },
+      "tokens": [
+        {
+          "name": "current",
+          "type": "number",
+          "title": {
+            "en": "Charge current (A)",
+            "nl": "Charge current (A)",
+            "sv": "Charge current (A)"
+          },
+          "example": 42
+        }
+      ]
+    },
+	{
+      "id": "changedCurrentLimit",
+      "title": {
+        "en": "Charge current limit changed (A)",
+        "nl": "Charge current limit changed (A)",
+        "sv": "Charge current limit changed (A)"
+      },
+      "titleFormatted": {
+        "en": "Charge current limit changed [[current]]A",
+        "sv": "Charge current limit changed [[current]]A"
+      },
+      "tokens": [
+        {
+          "name": "current",
+          "type": "number",
+          "title": {
+            "en": "Charge current limit (A)",
+            "nl": "Charge current limit (A)",
+            "sv": "Charge current limit (A)"
+          },
+          "example": 31
+        }
+      ]
+    },	
+	{
+      "id": "changedYield",
+      "title": {
+        "en": "Energy yield changed to (kW)",
+        "nl": "Energy yield changed to (kW)",
+        "sv": "Energy yield changed to (kW)"
+      },
+      "titleFormatted": {
+        "en": "Energy yield changed to [[yield]]kW",
+        "sv": "Energy yield changed to  [[yield]]kW"
+      },
+      "tokens": [
+        {
+          "name": "yield",
+          "type": "number",
+          "title": {
+            "en": "Energy yield (kW)",
+            "nl": "Energy yield (kW)",
+            "sv": "Energy yield(kW)"
+          },
+          "example": 1021
+        }
+      ]
+    }
+   ,
+    {
+      "id": "changedBatteryCapacity",
+      "title": {
+        "en": "Battery capacity changed (%)",
+        "nl": "Batterij capaciteit gewijzigd (%)",
+        "sv": "Batterladdning ändrad (%)"
+      },
+      "titleFormatted": {
+        "en": "Battery capacity changed to [[capacity]]%",
+        "sv": "Batterladdning ändrades till [[capacity]]%"
+      },
+      "tokens": [
+        {
+          "name": "capacity",
+          "type": "number",
+          "title": {
+            "en": "Battery Capacity (%)",
+            "nl": "Batterij capaciteit (%)",
+            "sv": "Batteriladdning (%)"
+          },
+          "example": 42
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "isOperationalStatus",
+      "title": {
+        "en": "Operational status !{{is|is not}}",
+        "nl": "Operationele status !{{is|is niet}}",
+        "sv": "Operationell status !{{är|är inte}}"
+      },
+      "titleFormatted": {
+        "en": "Operational status !{{is|is not}} [[status]]",
+        "nl": "Operationele status !{{is|is niet}} [[status]]",
+        "sv": "Operationell status !{{är|är inte}} [[status]]"
+      },
+      "args": [
+        {
+          "name": "status",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "303",
+              "label": {
+                "en": "Off",
+                "nl": "Uit",
+                "sv": "Off"
+              }
+            },
+            {
+              "id": "2291",
+              "label": {
+                "en": "Battery Standby",
+                "nl": "Batterij standby",
+                "sv": "Batteri standby"
+              }
+            },
+            {
+              "id": "2292",
+              "label": {
+                "en": "Battery Charging",
+                "nl": "Batterij opladen",
+                "sv": "Batteri laddas"
+              }
+            },
+            {
+              "id": "2293",
+              "label": {
+                "en": "Battery Discharging",
+                "nl": "Batterij ontladen",
+                "sv": "Batteri urladdas"
+              }
+            },
+            {
+              "id": "16777213",
+              "label": {
+                "en": "Information Not Available",
+                "nl": "Informatie Niet Beschikbaar",
+                "sv": "Information inte tillgänglig"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

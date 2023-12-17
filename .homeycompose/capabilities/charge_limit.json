@@ -1,0 +1,18 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Charge current limit",
+    "nl": "Laad stroom limiet",
+    "sv": "Cahrge current limit"
+  },
+  "insights": true,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/battery_capacity.svg",
+  "units": {
+    "en": "A",
+    "nl": "A",
+    "sv": "A"
+  }
+}

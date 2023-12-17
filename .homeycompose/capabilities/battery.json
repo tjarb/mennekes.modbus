@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Session Charged",
+    "nl": "Sessie geladen",
+    "sv": "Batteriladdning"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/battery.svg",
+  "units": {
+    "en": "kWh",
+    "nl": "kWh",
+    "sv": "kWh"
+  }
+}

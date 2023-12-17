@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Status",
+    "nl": "Status",
+    "sv": "Status"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/operational_status.svg"
+}
