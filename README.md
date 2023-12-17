@@ -1,4 +1,4 @@
-# SMA solar
+# Mennekes Amtron
 This Homey app allows you to monitor your Mennekes Amtron devices using the modbus protocol
 
 ## Supported devices
