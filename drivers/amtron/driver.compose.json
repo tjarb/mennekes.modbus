@@ -5,8 +5,8 @@
     "sv": "Mennekes Amtron"
   },
   "images": {
-    "large": "drivers/storage/assets/images/large.png",
-    "small": "drivers/storage/assets/images/small.png"
+    "large": "drivers/amtron/assets/images/large.png",
+    "small": "drivers/amtron/assets/images/small.png"
   },
   "class": "sensor",
   "capabilities": [

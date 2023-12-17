@@ -189,7 +189,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=storage"
+            "filter": "driver_id=amtron"
           }
         ]
       },
@@ -220,7 +220,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=storage"
+            "filter": "driver_id=amtron"
           }
         ]
       },
@@ -251,7 +251,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=storage"
+            "filter": "driver_id=amtron"
           }
         ]
       },
@@ -282,7 +282,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=storage"
+            "filter": "driver_id=amtron"
           }
         ]
       },
@@ -313,7 +313,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=storage"
+            "filter": "driver_id=amtron"
           }
         ]
       },
@@ -344,7 +344,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=storage"
+            "filter": "driver_id=amtron"
           }
         ]
       },
@@ -375,7 +375,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=storage"
+            "filter": "driver_id=amtron"
           }
         ]
       },
@@ -406,7 +406,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=storage"
+            "filter": "driver_id=amtron"
           }
         ]
       }
@@ -585,7 +585,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=storage"
+            "filter": "driver_id=amtron"
           },
           {
             "name": "status",
@@ -671,8 +671,8 @@
         "sv": "Mennekes Amtron"
       },
       "images": {
-        "large": "drivers/storage/assets/images/large.png",
-        "small": "drivers/storage/assets/images/small.png"
+        "large": "drivers/amtron/assets/images/large.png",
+        "small": "drivers/amtron/assets/images/small.png"
       },
       "class": "sensor",
       "capabilities": [
@@ -706,7 +706,7 @@
           "id": "start"
         }
       ],
-      "id": "storage",
+      "id": "amtron",
       "settings": [
         {
           "type": "group",
