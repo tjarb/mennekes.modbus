@@ -72,6 +72,78 @@
         }
       ]
     },
+	{
+      "id": "changedVoltageL1",
+      "title": {
+        "en": "L1 Voltage changed (V)",
+        "nl": "L1 Spanning afname gewijzigd (V)",
+        "sv": "L1 Volt ändrad (V)"
+      },
+      "titleFormatted": {
+        "en": "L1 Voltage changed to [[voltage]]V",
+        "sv": "L1 Volt ändrades till [[voltage]]V"
+      },
+      "tokens": [
+        {
+          "name": "voltage",
+          "type": "number",
+          "title": {
+            "en": "L1 Voltage  (V)",
+            "nl": "L1 spanning (V)",
+            "sv": "L1 Volt (V)"
+          },
+          "example": 16
+        }
+      ]
+    },
+	{
+      "id": "changedPowerL1",
+      "title": {
+        "en": "L1 Power drawn changed (kW)",
+        "nl": "L1 Power afname gewijzigd (kW)",
+        "sv": "L1 Effect uttagen ändrad (kW)"
+      },
+      "titleFormatted": {
+        "en": "L1 Power drawn changed to [[power]]kW",
+        "sv": "L1 Effekt uttagen ändrades till [[power]]kW"
+      },
+      "tokens": [
+        {
+          "name": "power",
+          "type": "number",
+          "title": {
+            "en": "L1 Power Drawn (kW)",
+            "nl": "L1 Power afname (kW)",
+            "sv": "L1 Effekt uttagen (kW)"
+          },
+          "example": 8.41
+        }
+      ]
+    },
+	{
+      "id": "changedCurrentL1",
+      "title": {
+        "en": "L1 Current drawn changed (A)",
+        "nl": "L1 Stroom afname gewijzigd (A)",
+        "sv": "L1 Strom uttagen ändrad (A)"
+      },
+      "titleFormatted": {
+        "en": "L1 Current drawn changed to [[current]]A",
+        "sv": "L1 Effekt uttagen ändrades till [[current]]A"
+      },
+      "tokens": [
+        {
+          "name": "current",
+          "type": "number",
+          "title": {
+            "en": "L1 Current Drawn (A)",
+            "nl": "L1 Stroom afname (A)",
+            "sv": "L1 Strom uttagen (A)"
+          },
+          "example": 16
+        }
+      ]
+    },
     {
       "id": "changedPowerDrawn",
       "title": {

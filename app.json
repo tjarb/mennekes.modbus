@@ -256,6 +256,99 @@
         ]
       },
       {
+        "id": "changedVoltageL1",
+        "title": {
+          "en": "L1 Voltage changed (V)",
+          "nl": "L1 Spanning afname gewijzigd (V)",
+          "sv": "L1 Volt ändrad (V)"
+        },
+        "titleFormatted": {
+          "en": "L1 Voltage changed to [[voltage]]V",
+          "sv": "L1 Volt ändrades till [[voltage]]V"
+        },
+        "tokens": [
+          {
+            "name": "voltage",
+            "type": "number",
+            "title": {
+              "en": "L1 Voltage  (V)",
+              "nl": "L1 spanning (V)",
+              "sv": "L1 Volt (V)"
+            },
+            "example": 16
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedPowerL1",
+        "title": {
+          "en": "L1 Power drawn changed (kW)",
+          "nl": "L1 Power afname gewijzigd (kW)",
+          "sv": "L1 Effect uttagen ändrad (kW)"
+        },
+        "titleFormatted": {
+          "en": "L1 Power drawn changed to [[power]]kW",
+          "sv": "L1 Effekt uttagen ändrades till [[power]]kW"
+        },
+        "tokens": [
+          {
+            "name": "power",
+            "type": "number",
+            "title": {
+              "en": "L1 Power Drawn (kW)",
+              "nl": "L1 Power afname (kW)",
+              "sv": "L1 Effekt uttagen (kW)"
+            },
+            "example": 8.41
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedCurrentL1",
+        "title": {
+          "en": "L1 Current drawn changed (A)",
+          "nl": "L1 Stroom afname gewijzigd (A)",
+          "sv": "L1 Strom uttagen ändrad (A)"
+        },
+        "titleFormatted": {
+          "en": "L1 Current drawn changed to [[current]]A",
+          "sv": "L1 Effekt uttagen ändrades till [[current]]A"
+        },
+        "tokens": [
+          {
+            "name": "current",
+            "type": "number",
+            "title": {
+              "en": "L1 Current Drawn (A)",
+              "nl": "L1 Stroom afname (A)",
+              "sv": "L1 Strom uttagen (A)"
+            },
+            "example": 16
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
         "id": "changedPowerDrawn",
         "title": {
           "en": "Power drawn changed (W)",
@@ -679,25 +772,47 @@
         "operational_status",
         "battery",
         "measure_power.charge",
-        "power_drawn",
-        "battery_capacity",
-        "charge_current",
+        "measure_power.L1",
+        "measure_voltage.L1",
+        "measure_current.L1",
         "charge_limit",
-        "measure_yield"
+        "meter_power.total"
       ],
       "capabilitiesOptions": {
         "measure_power.charge": {
           "title": {
-            "en": "Charge",
-            "nl": "Opladen",
+            "en": "Charging",
+            "nl": "Laden",
             "sv": "Laddning"
+          },
+          "decimals": 0
+        },
+        "measure_power.L1": {
+          "title": {
+            "en": "L1 power",
+            "nl": "L1 power",
+            "sv": "L1 power"
           }
         },
-        "measure_power.discharge": {
+        "measure_current.L1": {
           "title": {
-            "en": "Discharge",
-            "nl": "Ontladen",
-            "sv": "Urladdning"
+            "en": "L1 current",
+            "nl": "L1 current",
+            "sv": "L1 current"
+          }
+        },
+        "measure_voltage.L1": {
+          "title": {
+            "en": "L1 voltage",
+            "nl": "L1 voltage",
+            "sv": "L1 voltage"
+          }
+        },
+        "meter_power.total": {
+          "title": {
+            "en": "Lifetime total",
+            "nl": "Lifetime total",
+            "sv": "Lifetime total"
           }
         }
       },
