@@ -194,38 +194,7 @@
         ]
       },
       {
-        "id": "changedBattery",
-        "title": {
-          "en": "Battery charge changed",
-          "nl": "Batterij lading gewijzigd",
-          "sv": "Batteriladdning ändrad"
-        },
-        "titleFormatted": {
-          "en": "Battery charge changed to [[charge]]%",
-          "sv": "Batteriladdning ändrades till [[charge]]%"
-        },
-        "tokens": [
-          {
-            "name": "charge",
-            "type": "number",
-            "title": {
-              "en": "Battery Charge (%)",
-              "nl": "Batterij lading (%)",
-              "sv": "Batteriladdning (%)"
-            },
-            "example": 66
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=amtron"
-          }
-        ]
-      },
-      {
-        "id": "changedBatteryCharging",
+        "id": "changedChargePower",
         "title": {
           "en": "Battery charging changed (W)",
           "nl": "Batterij opladen gewijzigd (W)",
@@ -349,68 +318,6 @@
         ]
       },
       {
-        "id": "changedPowerDrawn",
-        "title": {
-          "en": "Power drawn changed (W)",
-          "nl": "Stroom afname gewijzigd (W)",
-          "sv": "Effekt uttagen ändrad (W)"
-        },
-        "titleFormatted": {
-          "en": "Power drawn changed to [[drawn]]W",
-          "sv": "Effekt uttagen ändrades till [[drawn]]W"
-        },
-        "tokens": [
-          {
-            "name": "drawn",
-            "type": "number",
-            "title": {
-              "en": "Power Drawn (W)",
-              "nl": "Stroom afname (W)",
-              "sv": "Effekt uttagen (W)"
-            },
-            "example": 303
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=amtron"
-          }
-        ]
-      },
-      {
-        "id": "changedCurrent",
-        "title": {
-          "en": "Charge current changed (A)",
-          "nl": "Charge current changed (A)",
-          "sv": "Charge current changed (A)"
-        },
-        "titleFormatted": {
-          "en": "Charge current changed [[current]]A",
-          "sv": "Charge current changed [[current]]A"
-        },
-        "tokens": [
-          {
-            "name": "current",
-            "type": "number",
-            "title": {
-              "en": "Charge current (A)",
-              "nl": "Charge current (A)",
-              "sv": "Charge current (A)"
-            },
-            "example": 42
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=amtron"
-          }
-        ]
-      },
-      {
         "id": "changedCurrentLimit",
         "title": {
           "en": "Charge current limit changed (A)",
@@ -444,22 +351,22 @@
       {
         "id": "changedYield",
         "title": {
-          "en": "Energy yield changed to (kW)",
-          "nl": "Energy yield changed to (kW)",
-          "sv": "Energy yield changed to (kW)"
+          "en": "Energy yield changed to (kWh)",
+          "nl": "Energy yield changed to (kWh)",
+          "sv": "Energy yield changed to (kWh)"
         },
         "titleFormatted": {
-          "en": "Energy yield changed to [[yield]]kW",
-          "sv": "Energy yield changed to  [[yield]]kW"
+          "en": "Energy yield changed to [[yield]]kWh",
+          "sv": "Energy yield changed to  [[yield]]kWh"
         },
         "tokens": [
           {
             "name": "yield",
             "type": "number",
             "title": {
-              "en": "Energy yield (kW)",
-              "nl": "Energy yield (kW)",
-              "sv": "Energy yield(kW)"
+              "en": "Energy yield (kWh)",
+              "nl": "Energy yield (kWh)",
+              "sv": "Energy yield(kWh)"
             },
             "example": 1021
           }
@@ -473,24 +380,55 @@
         ]
       },
       {
-        "id": "changedBatteryCapacity",
+        "id": "changedSessionYield",
         "title": {
-          "en": "Battery capacity changed (%)",
-          "nl": "Batterij capaciteit gewijzigd (%)",
-          "sv": "Batterladdning ändrad (%)"
+          "en": "Session yield changed (kWh)",
+          "nl": "Sessie energie gewijzigd (kWh)",
+          "sv": "Session yield ändrad (kWh)"
         },
         "titleFormatted": {
-          "en": "Battery capacity changed to [[capacity]]%",
-          "sv": "Batterladdning ändrades till [[capacity]]%"
+          "en": "Session charged energy changed to [[energy]]kWh",
+          "sv": "Session laddning ändrades till [[energy]]kWh"
         },
         "tokens": [
           {
-            "name": "capacity",
+            "name": "energy",
             "type": "number",
             "title": {
-              "en": "Battery Capacity (%)",
-              "nl": "Batterij capaciteit (%)",
-              "sv": "Batteriladdning (%)"
+              "en": "Session energy (kWh)",
+              "nl": "Sessie energie (kWh)",
+              "sv": "Session energy (kWh)"
+            },
+            "example": 42
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedRequiredEnergy",
+        "title": {
+          "en": "EV required energy changed (kWh)",
+          "nl": "EV gevraagde energie gewijzigd (kWh)",
+          "sv": "EV required energie ändrad (kWh)"
+        },
+        "titleFormatted": {
+          "en": "EV required energt has changed to [[energy]]kWh",
+          "sv": "EV required energt has ändrades till [[energy]]kWh"
+        },
+        "tokens": [
+          {
+            "name": "energy",
+            "type": "number",
+            "title": {
+              "en": "Required energy (kWh)",
+              "nl": "Required energie (kWh)",
+              "sv": "Required energy (kWh)"
             },
             "example": 42
           }
@@ -770,15 +708,24 @@
       "class": "sensor",
       "capabilities": [
         "operational_status",
-        "battery",
+        "meter_power.required",
         "measure_power.charge",
         "measure_power.L1",
         "measure_voltage.L1",
         "measure_current.L1",
-        "charge_limit",
+        "measure_current.limit",
+        "meter_power.session",
         "meter_power.total"
       ],
       "capabilitiesOptions": {
+        "meter_power.required": {
+          "title": {
+            "en": "Required",
+            "nl": "Required",
+            "sv": "Required"
+          },
+          "decimals": 0
+        },
         "measure_power.charge": {
           "title": {
             "en": "Charging",
@@ -813,6 +760,13 @@
             "en": "Lifetime total",
             "nl": "Lifetime total",
             "sv": "Lifetime total"
+          }
+        },
+        "meter_power.session": {
+          "title": {
+            "en": "Session total",
+            "nl": "Sessie geladen",
+            "sv": "Session Laddning"
           }
         }
       },

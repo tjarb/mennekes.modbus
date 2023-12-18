@@ -11,16 +11,25 @@
   "class": "sensor",
   "capabilities": [
     "operational_status",
-    "battery",
+	"meter_power.required",
     "measure_power.charge",
 	"measure_power.L1",
 	"measure_voltage.L1",
 	"measure_current.L1",
-	"charge_limit",
+	"measure_current.limit",
+	"meter_power.session",
 	"meter_power.total"
 	
   ],
   "capabilitiesOptions": {
+    "meter_power.required": {
+      "title": {
+        "en": "Required",
+        "nl": "Required",
+        "sv": "Required"
+      },
+	  "decimals": 0
+    },
     "measure_power.charge": {
       "title": {
         "en": "Charging",
@@ -56,9 +65,16 @@
         "nl": "Lifetime total",
         "sv": "Lifetime total"
       }	  
+    },	
+    "meter_power.session": {
+      "title": {
+        "en": "Session total",
+        "nl": "Sessie geladen",
+        "sv": "Session Laddning"
+      }	  
     }
   },
-  "pair": [
+   "pair": [
     {
       "id": "start"
     }

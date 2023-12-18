@@ -14,21 +14,16 @@ class MennekesModbusStorageDevice extends Device {
     async onInit() {
         let self = this;
 		
-
-        // Register device triggers
+        // Register device triggers, as defined in ./driver.flow.compose.json
         self._changedOperationalStatus = self.homey.flow.getDeviceTriggerCard('changedOperationalStatus');		//As defined in driver.flow.compose.json
-        self._changedBattery = self.homey.flow.getDeviceTriggerCard('changedBattery');
-        self._changedBatteryCharging = self.homey.flow.getDeviceTriggerCard('changedBatteryCharging');
-        self._changedPowerDrawn = self.homey.flow.getDeviceTriggerCard('changedPowerDrawn');
- //       self._changedBatteryCapacity = self.homey.flow.getDeviceTriggerCard('changedBatteryCapacity');
+        self._changedSessionYield = self.homey.flow.getDeviceTriggerCard('changedSessionYield');
+        self._changedChargePower = self.homey.flow.getDeviceTriggerCard('changedChargePower');
         self._changedCurrent_L1 = self.homey.flow.getDeviceTriggerCard('changedCurrentL1');
 		self._changedPower_L1 = self.homey.flow.getDeviceTriggerCard('changedPowerL1');
 		self._changedVoltage_L1 = self.homey.flow.getDeviceTriggerCard('changedVoltageL1');
-		self._changedCurrent = self.homey.flow.getDeviceTriggerCard('changedCurrent');
 		self._changedCurrentLimit = self.homey.flow.getDeviceTriggerCard('changedCurrentLimit');
-		//self._changedConnected = self.homey.flow.getDeviceTriggerCard('changedConnected');
 		self._changedYield = self.homey.flow.getDeviceTriggerCard('changedYield');
-        
+        self._changedRequiredEnergy = self.homey.flow.getDeviceTriggerCard('changedRequiredEnergy');
 		
 		
         let options = {
@@ -61,7 +56,7 @@ class MennekesModbusStorageDevice extends Device {
 					client.readHoldingRegisters(200, 28) 	/*AC measurements, read complete page*/    			
 					
 				]).then((results) => {
-						current_limit 	 = 								results[0].response._body._valuesAsArray[0]				;	//current limit in A
+						current_limit 	 = 									results[0].response._body._valuesAsArray[0]							;	//actual current limit in A, read back from the charger
 						self.log("current_limit " + current_limit	);
 					
 						let power_L1		 = decodeData.decodeU32(		results[1].response._body._valuesAsArray.slice(6,8), 0, 0)	/1000	;//Power in L1 (kWh)
@@ -96,7 +91,7 @@ class MennekesModbusStorageDevice extends Device {
 									let tokens = {
 										charging: tot_power
 									}
-									self._changedBatteryCharging.trigger(self, tokens, {}).catch(error => { self.error(error) });
+									self._changedChargePower.trigger(self, tokens, {}).catch(error => { self.error(error) });
 
 								}).catch(reason => {
 									self.error(reason);
@@ -136,14 +131,14 @@ class MennekesModbusStorageDevice extends Device {
 						
 						
 						 // current limit
-						if (self.getCapabilityValue('charge_limit') != current_limit) {
-							self.setCapabilityValue('charge_limit', current_limit)
+						if (self.getCapabilityValue('measure_current.limit') != current_limit) {
+							self.setCapabilityValue('measure_current.limit', current_limit)
 								.then(function () {
 
 									let tokens = {
 										current: current_limit
 									}
-									self.changedCurrentLimit.trigger(self, tokens, {}).catch(error => { self.error(error) });
+									self._changedCurrentLimit.trigger(self, tokens, {}).catch(error => { self.error(error) });
 
 								}).catch(reason => {
 									self.error(reason);
@@ -161,86 +156,75 @@ class MennekesModbusStorageDevice extends Device {
             self.pollingInterval = self.homey.setInterval(() => {
                 Promise.all([
                     client.readHoldingRegisters(104, 1),	/*charger operational code*/
-                    client.readHoldingRegisters(705, 1),	/*Battery charged during session in Wh*/
-                    client.readHoldingRegisters(1000, 1),	/*current limit*/
                     client.readHoldingRegisters(741, 6),	/*EV ID*/
-                    client.readHoldingRegisters(709, 1),	/*Charge duration in seconds*/
-					client.readHoldingRegisters(716, 2),	/*EV_charged energy (wh)*/
+					client.readHoldingRegisters(715, 5),	/*EV_Session charged energy (wh), Session duration*/
 					client.readHoldingRegisters(134, 1),	/*EV_Max_Current (mA)*/
 					client.readHoldingRegisters(122, 1),	/*EV_state Control Pilot vehi-cle state in deci-mal format*/
-					client.readHoldingRegisters(200, 28) 	/*AC measurements, read complete page*/                
+					client.readHoldingRegisters(200, 28), 	/*AC measurements, read complete page*/                
+					client.readHoldingRegisters(713, 2) 	/*EV_energy_required*/                
+
 
                 ]).then((results) => {				
 					
                     let operational_code = 								results[0].response._body._valuesAsArray[0]				;	/*charger operational code*/	
 					//self.log("operational code " + operational_code	);
 					
-                    let battery 		 = 								results[1].response._body._valuesAsArray[0] / 1000.0	;	/*Charged Energy in kWh*/                  
-					//self.log("Session charged energt " + battery	);
+	
+                    let EV_ID 			 = decodeData.decodeHexString(	results[1].response._body._valuesAsArray )				;		/*EV ID, to HEX string*/
+					self.log("EV_ID: "+EV_ID);
 					
-/*                    let current_limit 	 = 								results[2].response._body._valuesAsArray[0]				;	//current limit in A
-					self.log("current_limit " + current_limit	);
-*/					
-                    let EV_ID 			 = decodeData.decodeHexString(	results[3].response._body._valuesAsArray )				;		/*EV ID, to HEX string*/
-					//self.log("EV_ID: "+EV_ID);
+					let EV_capability	 = 								results[2].response._body._valuesAsArray[0]				;//Max Current info from EV
+					self.log("Car MAX current capability" + EV_capability);
 					
-					let session_duration = 								results[4].response._body._valuesAsArray[0]		/60	;		//minutes
-					//self.log("Session duration "+ session_duration);
+					let session_yield		 = decodeData.decodeU32(	results[2].response._body._valuesAsArray.slice(1,3), 0, 0)	/1000		;//session charged energy (kWh)
+					self.log("Session charged energy HiRes"+session_yield);
 					
-					let EV_charged		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray, 0, 0)	/1000		;//session charged energy (kWh)
-					//self.log("EV_charged energy "+EV_charged);
+					let session_duration =	 decodeData.decodeU32(		results[2].response._body._valuesAsArray.slice(3,5), 0, 0)	/60	;		//minutes
+					self.log("Session duration "+ session_duration);
 					
-					let Charger_curent_max	 = 							results[6].response._body._valuesAsArray[0]					;	//charger max current set by operator
+					let Charger_curent_max	 = 							results[3].response._body._valuesAsArray[0]					;	//charger max current set by operator
 					self.log("Charger_curent_max "+Charger_curent_max);
 					
-					let EV_control_state = 								results[7].response._body._valuesAsArray[0]				;	//EV needs to support this
-					//self.log("EV_control_state "+EV_control_state);
+					let EV_control_state = 								results[4].response._body._valuesAsArray[0]				;	//EV needs to support this
+					self.log("EV_control_state "+EV_control_state);
 			
-/*					let power_L1		 = decodeData.decodeU32(		results[8].response._body._valuesAsArray.slice(6,8), 0, 0)	/1000	;//Power in L1 (kWh)
+/*					let power_L1		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(6,8), 0, 0)	/1000	;//Power in L1 (kWh)
 					//self.log("power_L1 "+power_L1);
 					
-					let power_L2		 = decodeData.decodeU32(		results[8].response._body._valuesAsArray.slice(8,10), 0, 0)	/1000		;
+					let power_L2		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(8,10), 0, 0)	/1000		;
 					//self.log("power_L2 "+power_L2);
 					
-					let power_L3		 = decodeData.decodeU32(		results[8].response._body._valuesAsArray.slice(10,12), 0, 0)/1000			;
+					let power_L3		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(10,12), 0, 0)/1000			;
 					//self.log("power_L3 "+power_L3);
 					
-					let current_L1		 = decodeData.decodeU32(		results[8].response._body._valuesAsArray.slice(12,14), 0, 0) /1000.0	;	//Current in L1 (A)
+					let current_L1		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(12,14), 0, 0) /1000.0	;	//Current in L1 (A)
 					//self.log("current_L1 "+current_L1);
 					
-					let current_L2		 = decodeData.decodeU32(		results[8].response._body._valuesAsArray.slice(14,16), 0, 0) /1000.0	;
+					let current_L2		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(14,16), 0, 0) /1000.0	;
 					//self.log("current_L2 "+current_L2);
 					
-					let current_L3		 = decodeData.decodeU32(		results[8].response._body._valuesAsArray.slice(16,18), 0, 0) /1000.0	;
+					let current_L3		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(16,18), 0, 0) /1000.0	;
 					//self.log("current_L3 "+current_L3);
 */					
-					let tot_yield		 = decodeData.decodeU32(		results[8].response._body._valuesAsArray.slice(18,20), 0, 0) / 1000.0	;//Total energy in kWh
+					let tot_yield		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(18,20), 0, 0) / 1000.0	;//Total energy in kWh
 					//self.log("tot_yield "+tot_yield);
 /*					
-					let tot_power		 = decodeData.decodeU32(		results[8].response._body._valuesAsArray.slice(20,22), 0, 0) /1000.0	;//Total charging energy in kW
+					let tot_power		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(20,22), 0, 0) /1000.0	;//Total charging energy in kW
 					//self.log("tot_power "+tot_power);
 */					
-                    let voltage_L1		 = decodeData.decodeU32(		results[8].response._body._valuesAsArray.slice(22,24), 0, 0)			;//AC L1 voltage in Volt
+                    let voltage_L1		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(22,24), 0, 0)			;//AC L1 voltage in Volt
 					
 					//self.log("voltage_L1 "+voltage_L1);
 					
-                    let ac_volt_L2		 = decodeData.decodeU32(		results[8].response._body._valuesAsArray.slice(24,26), 0, 0)			;
-					let ac_volt_L3		 = decodeData.decodeU32(		results[8].response._body._valuesAsArray.slice(26,28), 0, 0)			;
+                    let voltage_L2		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(24,26), 0, 0)			;
+					let voltage_L3		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(26,28), 0, 0)			;
 
-					let charge 			 = decodeData.decodeU32(		results[2].response._body._valuesAsArray, 0, 0		) /1000.0			;//Actual AC charge limit current
-					
-					let power_drawn 	 = 0;
-					let battery_capacity = 0;
-					let powergrid_feed_in = 0;
-					let discharge = 0;							
-					
-					/*Cant discharge*/
-                    //31397, Battery charge, Wh (U64, FIX0)
-                    //31401, Battery discharge, Wh (U64, FIX0)
+					let EV_Req_energy	 = decodeData.decodeU32(		results[6].response._body._valuesAsArray, 0, 0) /1000.0	;//Total charging energy in kW
+					self.log("EV_Req_energy "+EV_Req_energy);
 
                     // OPERATIONAL STATUS
 					let state = self.operational_string(operational_code);				
-					self.log( "operation_status: "+ self.homey.__(state) );
+					//self.log( "operation_status: "+ self.homey.__(state) );
                     if (self.getCapabilityValue('operational_status') != self.homey.__(state) ) {				
                         self.setCapabilityValue('operational_status', self.homey.__(state) )
                             .then(function () {
@@ -257,15 +241,30 @@ class MennekesModbusStorageDevice extends Device {
                     }
 					
 
-                    // BATTERY, session charged
-                    if (self.getCapabilityValue('battery') != battery) {
-                        self.setCapabilityValue('battery', battery)
+                    // Energy required by the EV
+                    if (self.getCapabilityValue('meter_power.required') != EV_Req_energy) {
+                        self.setCapabilityValue('meter_power.required', EV_Req_energy)
                             .then(function () {
 
                                 let tokens = {
-                                    charge: battery
+                                    energy: EV_Req_energy
                                 }
-                                self._changedBattery.trigger(self, tokens, {}).catch(error => { self.error(error) });
+                                self._changedRequiredEnergy.trigger(self, tokens, {}).catch(error => { self.error(error) });
+
+                            }).catch(reason => {
+                                self.error(reason);
+                            });
+                    }
+
+                    // BATTERY, session charged
+                    if (self.getCapabilityValue('meter_power.session') != session_yield) {
+                        self.setCapabilityValue('meter_power.session', session_yield)
+                            .then(function () {
+
+                                let tokens = {
+                                    energy: session_yield
+                                }
+                                self._changedSessionYield.trigger(self, tokens, {}).catch(error => { self.error(error) });
 
                             }).catch(reason => {
                                 self.error(reason);
