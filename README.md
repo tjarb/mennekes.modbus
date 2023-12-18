@@ -1,5 +1,5 @@
 # Mennekes Amtron
-This Homey app allows you to monitor your Mennekes Amtron devices using the modbus protocol
+This Homey app allows you to monitor and control your Mennekes Amtron devices using the modbus protocol
 
 ## Supported devices
 Mennekes Amtron
