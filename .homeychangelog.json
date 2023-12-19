@@ -1,5 +1,11 @@
 {
-    "0.1.0": {
-        "en": "Initial project for Mennekes Amtron EV chargers"
-    }
+  "0.1.0": {
+    "en": "Initial release for Mennekes Amtron EV chargers"
+  },
+  "0.1.1": {
+    "en": "fixed decimal value bug."
+  },
+  "0.1.2": {
+    "en": "changed bugs in power measurement"
+  }
 }
