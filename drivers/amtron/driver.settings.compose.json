@@ -1,0 +1,48 @@
+[
+    {
+        "type": "group",
+        "label": {
+            "en": "Mennekes Amtron settings",
+            "nl": "Mennekes Amtron instellingen",
+            "sv": "Mennekes Amtron inställningar"
+        },
+        "children": [
+            {
+                "id": "address",
+                "type": "text",
+                "value": "0.0.0.0",
+                "label": {
+                    "en": "IP Address",
+                    "nl": "IP adres",
+                    "sv": "IP adress"
+                }
+            },
+            {
+                "id": "port",
+                "type": "number",
+                "value": 502,
+                "step": 1,
+                "label": {
+                    "en": "Port",
+                    "nl": "Poort",
+                    "sv": "Port"
+                }
+            },
+            {
+                "id": "polling",
+                "type": "number",
+                "value": 1,
+                "step": 0.5,
+                "attr": {
+                    "min": 0.5,
+                    "max": 5
+                },
+                "label": {
+                    "en": "Polling",
+                    "nl": "Polling",
+                    "sv": "Uppdateringsfrekvens"
+                }
+            }
+        ]
+    }
+]

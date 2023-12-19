@@ -1,0 +1,32 @@
+{
+  "settings": {
+    "title": "Mennekes Amtron Modbus settings",
+    "subtitle": "Please enter port. Default port is 502."
+  },
+  "pair": {
+    "title": "Add Mennekes Amtron charger",
+    "nosettings": "Please fill in all the required fields.",
+    "intro": "Enter the IP address of your Mennekes Amtron charger.",
+    "address": "IP Address",
+    "port": "Port",
+    "polling": "Polling Frequency",
+    "connect": "Connect"
+  },
+  "Available":	 "Available",				
+  "Occupied":	 "Occupied",
+  "Reserved":	 "Reserved",
+  "Unavailable": "Unavailable",
+  "Faulted":	 "Faulted",
+  "Preparing":	 "Preparing",
+  "Charging":	 "Charging",
+  "Suspended":	 "Suspended",
+  "Finishing":	 "Finishing",
+  "Unknown": 	 "Unknown",						
+  "Unreachable": "Unreachable",
+  "Off": "Off",
+  "Standby": "Charger Standby",
+  "Charge": "Battery Charging",
+  "Discharge": "Battery Discharging",
+  "NA": "Information Not Available"
+  
+}

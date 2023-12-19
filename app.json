@@ -1,0 +1,569 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "mennekes.modbus",
+  "sdk": 3,
+  "version": "0.0.1",
+  "compatibility": ">=5.0.0",
+  "name": {
+    "en": "Mennekes Amtron"
+  },
+  "description": {
+    "en": "My power conection."
+  },
+  "category": "energy",
+  "tags": {
+    "en": [
+      "mennekes",
+      "charger",
+      "electric vehicles",
+      "energy",
+      "modbus"
+    ]
+  },
+  "author": {
+    "name": "tjarb"
+  },
+  "contributors": {},
+  "bugs": {
+    "url": "https://github.com/tjarb/mennekes.modbus/issues"
+  },
+  "source": "https://github.com/tjarb/mennekes.modbus",
+  "homeyCommunityTopicId": 98346,
+  "images": {
+    "xlarge": "./assets/images/xlarge.png",
+    "large": "./assets/images/large.png",
+    "small": "./assets/images/small.png"
+  },
+  "brandColor": "#62a3cc",
+  "dependencies": {
+    "net": "*"
+  },
+  "flow": {
+    "actions": [
+      {
+        "id": "set_target_current",
+        "title": {
+          "en": "Limit the active carger current",
+          "sv": "Begränsa den aktiva strom"
+        },
+        "titleFormatted": {
+          "en": "Limit the active current to current [[current]]",
+          "sv": "Begränsa den aktiva strom till current [[current]]"
+        },
+        "args": [
+          {
+            "name": "current",
+            "type": "number",
+            "title": {
+              "en": "current (A)",
+              "sv": "current (A)"
+            },
+            "min": 0,
+            "max": 32
+          }
+        ]
+      }
+    ],
+    "triggers": [
+      {
+        "id": "changedOperationalStatus",
+        "title": {
+          "en": "Status changed",
+          "nl": "Status gewijzigd",
+          "sv": "Status ändrad"
+        },
+        "titleFormatted": {
+          "en": "Status changed to [[status]]",
+          "sv": "Status ändrades till [[status]]"
+        },
+        "tokens": [
+          {
+            "name": "status",
+            "type": "string",
+            "title": {
+              "en": "Operational Status",
+              "nl": "Operationele status",
+              "sv": "Operationell status"
+            },
+            "example": "Occupied"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedChargePower",
+        "title": {
+          "en": "Battery charging changed (W)",
+          "nl": "Batterij opladen gewijzigd (W)",
+          "sv": "Batteriladdning ändrad (W)"
+        },
+        "titleFormatted": {
+          "en": "Battery charging changed to [[charging]]W",
+          "sv": "Batteriladdning ändrades till [[charging]]W"
+        },
+        "tokens": [
+          {
+            "name": "charging",
+            "type": "number",
+            "title": {
+              "en": "Battery Charging (W)",
+              "nl": "Batterij opladen (W)",
+              "sv": "Batteriladdning effekt (W)"
+            },
+            "example": 1337
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedVoltageL1",
+        "title": {
+          "en": "L1 Voltage changed (V)",
+          "nl": "L1 Spanning afname gewijzigd (V)",
+          "sv": "L1 Volt ändrad (V)"
+        },
+        "titleFormatted": {
+          "en": "L1 Voltage changed to [[voltage]]V",
+          "sv": "L1 Volt ändrades till [[voltage]]V"
+        },
+        "tokens": [
+          {
+            "name": "voltage",
+            "type": "number",
+            "title": {
+              "en": "L1 Voltage  (V)",
+              "nl": "L1 spanning (V)",
+              "sv": "L1 Volt (V)"
+            },
+            "example": 16
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedPowerL1",
+        "title": {
+          "en": "L1 Power drawn changed (kW)",
+          "nl": "L1 Power afname gewijzigd (kW)",
+          "sv": "L1 Effect uttagen ändrad (kW)"
+        },
+        "titleFormatted": {
+          "en": "L1 Power drawn changed to [[power]]kW",
+          "sv": "L1 Effekt uttagen ändrades till [[power]]kW"
+        },
+        "tokens": [
+          {
+            "name": "power",
+            "type": "number",
+            "title": {
+              "en": "L1 Power Drawn (kW)",
+              "nl": "L1 Power afname (kW)",
+              "sv": "L1 Effekt uttagen (kW)"
+            },
+            "example": 8.41
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedCurrentL1",
+        "title": {
+          "en": "L1 Current drawn changed (A)",
+          "nl": "L1 Stroom afname gewijzigd (A)",
+          "sv": "L1 Strom uttagen ändrad (A)"
+        },
+        "titleFormatted": {
+          "en": "L1 Current drawn changed to [[current]]A",
+          "sv": "L1 Effekt uttagen ändrades till [[current]]A"
+        },
+        "tokens": [
+          {
+            "name": "current",
+            "type": "number",
+            "title": {
+              "en": "L1 Current Drawn (A)",
+              "nl": "L1 Stroom afname (A)",
+              "sv": "L1 Strom uttagen (A)"
+            },
+            "example": 16
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedChargerLimit",
+        "title": {
+          "en": "Charge current limit changed (A)",
+          "nl": "Charge current limit changed (A)",
+          "sv": "Charge current limit changed (A)"
+        },
+        "titleFormatted": {
+          "en": "Charge current limit changed [[current]]A",
+          "sv": "Charge current limit changed [[current]]A"
+        },
+        "tokens": [
+          {
+            "name": "current",
+            "type": "number",
+            "title": {
+              "en": "Charge current limit (A)",
+              "nl": "Charge current limit (A)",
+              "sv": "Charge current limit (A)"
+            },
+            "example": 32
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedEV_capability",
+        "title": {
+          "en": "EV's current capability changed (A)",
+          "nl": "EV's current capability changed (A)",
+          "sv": "EV's current capability changed (A)"
+        },
+        "titleFormatted": {
+          "en": "EV's current capability changed [[current]]A",
+          "sv": "EV's current capability changed [[current]]A"
+        },
+        "tokens": [
+          {
+            "name": "current",
+            "type": "number",
+            "title": {
+              "en": "EV's current limit (A)",
+              "nl": "EV's current limit (A)",
+              "sv": "EV's current limit (A)"
+            },
+            "example": 16
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedYield",
+        "title": {
+          "en": "Energy yield changed to (kWh)",
+          "nl": "Energy yield changed to (kWh)",
+          "sv": "Energy yield changed to (kWh)"
+        },
+        "titleFormatted": {
+          "en": "Energy yield changed to [[yield]]kWh",
+          "sv": "Energy yield changed to  [[yield]]kWh"
+        },
+        "tokens": [
+          {
+            "name": "yield",
+            "type": "number",
+            "title": {
+              "en": "Energy yield (kWh)",
+              "nl": "Energy yield (kWh)",
+              "sv": "Energy yield(kWh)"
+            },
+            "example": 1021
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedSessionYield",
+        "title": {
+          "en": "Session yield changed (kWh)",
+          "nl": "Sessie energie gewijzigd (kWh)",
+          "sv": "Session yield ändrad (kWh)"
+        },
+        "titleFormatted": {
+          "en": "Session charged energy changed to [[energy]]kWh",
+          "sv": "Session laddning ändrades till [[energy]]kWh"
+        },
+        "tokens": [
+          {
+            "name": "energy",
+            "type": "number",
+            "title": {
+              "en": "Session energy (kWh)",
+              "nl": "Sessie energie (kWh)",
+              "sv": "Session energy (kWh)"
+            },
+            "example": 42
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedRequiredEnergy",
+        "title": {
+          "en": "EV required energy changed (kWh)",
+          "nl": "EV gevraagde energie gewijzigd (kWh)",
+          "sv": "EV required energie ändrad (kWh)"
+        },
+        "titleFormatted": {
+          "en": "EV required energt has changed to [[energy]]kWh",
+          "sv": "EV required energt has ändrades till [[energy]]kWh"
+        },
+        "tokens": [
+          {
+            "name": "energy",
+            "type": "number",
+            "title": {
+              "en": "Required energy (kWh)",
+              "nl": "Required energie (kWh)",
+              "sv": "Required energy (kWh)"
+            },
+            "example": 42
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Mennekes Amtron",
+        "nl": "Mennekes Amtron",
+        "sv": "Mennekes Amtron"
+      },
+      "platforms": [
+        "local"
+      ],
+      "images": {
+        "large": "drivers/amtron/assets/images/large.png",
+        "small": "drivers/amtron/assets/images/small.png"
+      },
+      "class": "other",
+      "capabilities": [
+        "operational_status",
+        "meter_power.required",
+        "measure_power.charge",
+        "measure_power.L1",
+        "measure_voltage.L1",
+        "measure_current.L1",
+        "measure_current.ChargerLimit",
+        "measure_current.EV_capability",
+        "meter_power.session",
+        "meter_power.total"
+      ],
+      "capabilitiesOptions": {
+        "meter_power.required": {
+          "title": {
+            "en": "Required",
+            "nl": "Required",
+            "sv": "Required"
+          },
+          "decimals": 0
+        },
+        "measure_power.charge": {
+          "title": {
+            "en": "Charging",
+            "nl": "Laden",
+            "sv": "Laddning"
+          },
+          "decimals": 0
+        },
+        "measure_power.L1": {
+          "title": {
+            "en": "L1 power",
+            "nl": "L1 power",
+            "sv": "L1 power"
+          }
+        },
+        "measure_current.L1": {
+          "title": {
+            "en": "L1 current",
+            "nl": "L1 current",
+            "sv": "L1 current"
+          }
+        },
+        "measure_voltage.L1": {
+          "title": {
+            "en": "L1 voltage",
+            "nl": "L1 voltage",
+            "sv": "L1 voltage"
+          }
+        },
+        "measure_current.ChargerLimit": {
+          "title": {
+            "en": "Limit",
+            "nl": "Limiet",
+            "sv": "Limit"
+          }
+        },
+        "measure_current.EV_capability": {
+          "title": {
+            "en": "EV's capability",
+            "nl": "EV's capability",
+            "sv": "EV's capability"
+          }
+        },
+        "meter_power.total": {
+          "title": {
+            "en": "Lifetime total",
+            "nl": "Lifetime total",
+            "sv": "Lifetime total"
+          }
+        },
+        "meter_power.session": {
+          "title": {
+            "en": "Session total",
+            "nl": "Sessie geladen",
+            "sv": "Session Laddning"
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "start"
+        }
+      ],
+      "id": "amtron",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Mennekes Amtron settings",
+            "nl": "Mennekes Amtron instellingen",
+            "sv": "Mennekes Amtron inställningar"
+          },
+          "children": [
+            {
+              "id": "address",
+              "type": "text",
+              "value": "0.0.0.0",
+              "label": {
+                "en": "IP Address",
+                "nl": "IP adres",
+                "sv": "IP adress"
+              }
+            },
+            {
+              "id": "port",
+              "type": "number",
+              "value": 502,
+              "step": 1,
+              "label": {
+                "en": "Port",
+                "nl": "Poort",
+                "sv": "Port"
+              }
+            },
+            {
+              "id": "polling",
+              "type": "number",
+              "value": 1,
+              "step": 0.5,
+              "attr": {
+                "min": 0.5,
+                "max": 5
+              },
+              "label": {
+                "en": "Polling",
+                "nl": "Polling",
+                "sv": "Uppdateringsfrekvens"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "operational_status": {
+      "type": "string",
+      "title": {
+        "en": "Status",
+        "nl": "Status",
+        "sv": "Status"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/operational_status.svg"
+    },
+    "target_power": {
+      "title": {
+        "en": "Target current limit",
+        "nl": "Target current limit",
+        "sv": "Högsta tillåtna effekt"
+      },
+      "type": "number",
+      "desc": {
+        "en": "The charger active current limit",
+        "nl": "The charger active current limit",
+        "sv": "Växelriktarens aktiva effekt gräns"
+      },
+      "min": 6,
+      "max": 32,
+      "decimals": 0,
+      "step": 1,
+      "units": {
+        "en": "W"
+      },
+      "setable": true,
+      "getable": true,
+      "insights": true,
+      "uiComponent": "slider",
+      "chartType": "stepLine"
+    }
+  }
+}

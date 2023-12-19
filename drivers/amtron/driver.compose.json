@@ -1,0 +1,100 @@
+{
+  "name": {
+    "en": "Mennekes Amtron",
+    "nl": "Mennekes Amtron",
+    "sv": "Mennekes Amtron"
+  },
+  "platforms": [
+        "local"
+    ],
+  "images": {
+    "large": "drivers/amtron/assets/images/large.png",
+    "small": "drivers/amtron/assets/images/small.png"
+  },
+  "class": "other",
+  "capabilities": [
+    "operational_status",
+	"meter_power.required",
+    "measure_power.charge",
+	"measure_power.L1",
+	"measure_voltage.L1",
+	"measure_current.L1",
+	"measure_current.ChargerLimit",
+	"measure_current.EV_capability",
+	"meter_power.session",
+	"meter_power.total"
+	
+  ],
+  "capabilitiesOptions": {
+    "meter_power.required": {
+      "title": {
+        "en": "Required",
+        "nl": "Required",
+        "sv": "Required"
+      },
+	  "decimals": 0
+    },
+    "measure_power.charge": {
+      "title": {
+        "en": "Charging",
+        "nl": "Laden",
+        "sv": "Laddning"
+      },
+	  "decimals": 0
+    },
+    "measure_power.L1": {
+      "title": {
+        "en": "L1 power",
+        "nl": "L1 power",
+        "sv": "L1 power"
+      }
+	},
+    "measure_current.L1": {
+      "title": {
+        "en": "L1 current",
+        "nl": "L1 current",
+        "sv": "L1 current"
+      }
+	},
+    "measure_voltage.L1": {
+      "title": {
+        "en": "L1 voltage",
+        "nl": "L1 voltage",
+        "sv": "L1 voltage"
+      }	  
+    },
+	"measure_current.ChargerLimit": {
+      "title": {
+        "en": "Limit",
+        "nl": "Limiet",
+        "sv": "Limit"
+      }
+	},
+	"measure_current.EV_capability": {
+      "title": {
+        "en": "EV's capability",
+        "nl": "EV's capability",
+        "sv": "EV's capability"
+      }
+	},
+    "meter_power.total": {
+      "title": {
+        "en": "Lifetime total",
+        "nl": "Lifetime total",
+        "sv": "Lifetime total"
+      }	  
+    },	
+    "meter_power.session": {
+      "title": {
+        "en": "Session total",
+        "nl": "Sessie geladen",
+        "sv": "Session Laddning"
+      }	  
+    }
+  },
+   "pair": [
+    {
+      "id": "start"
+    }
+  ]
+}

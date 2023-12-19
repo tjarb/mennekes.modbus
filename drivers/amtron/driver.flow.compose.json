@@ -1,0 +1,247 @@
+{
+  "triggers": [
+    {
+      "id": "changedOperationalStatus",
+      "title": {
+        "en": "Status changed",
+        "nl": "Status gewijzigd",
+        "sv": "Status ändrad"
+      },
+      "titleFormatted": {
+        "en": "Status changed to [[status]]",
+        "sv": "Status ändrades till [[status]]"
+      },
+      "tokens": [
+        {
+          "name": "status",
+          "type": "string",
+          "title": {
+            "en": "Operational Status",
+            "nl": "Operationele status",
+            "sv": "Operationell status"
+          },
+          "example": "Occupied"
+        }
+      ]  
+    },
+    {
+      "id": "changedChargePower",
+      "title": {
+        "en": "Battery charging changed (W)",
+        "nl": "Batterij opladen gewijzigd (W)",
+        "sv": "Batteriladdning ändrad (W)"
+      },
+      "titleFormatted": {
+        "en": "Battery charging changed to [[charging]]W",
+        "sv": "Batteriladdning ändrades till [[charging]]W"
+      },
+      "tokens": [
+        {
+          "name": "charging",
+          "type": "number",
+          "title": {
+            "en": "Battery Charging (W)",
+            "nl": "Batterij opladen (W)",
+            "sv": "Batteriladdning effekt (W)"
+          },
+          "example": 1337
+        }
+      ]
+    },
+	{
+      "id": "changedVoltageL1",
+      "title": {
+        "en": "L1 Voltage changed (V)",
+        "nl": "L1 Spanning afname gewijzigd (V)",
+        "sv": "L1 Volt ändrad (V)"
+      },
+      "titleFormatted": {
+        "en": "L1 Voltage changed to [[voltage]]V",
+        "sv": "L1 Volt ändrades till [[voltage]]V"
+      },
+      "tokens": [
+        {
+          "name": "voltage",
+          "type": "number",
+          "title": {
+            "en": "L1 Voltage  (V)",
+            "nl": "L1 spanning (V)",
+            "sv": "L1 Volt (V)"
+          },
+          "example": 16
+        }
+      ]
+    },
+	{
+      "id": "changedPowerL1",
+      "title": {
+        "en": "L1 Power drawn changed (kW)",
+        "nl": "L1 Power afname gewijzigd (kW)",
+        "sv": "L1 Effect uttagen ändrad (kW)"
+      },
+      "titleFormatted": {
+        "en": "L1 Power drawn changed to [[power]]kW",
+        "sv": "L1 Effekt uttagen ändrades till [[power]]kW"
+      },
+      "tokens": [
+        {
+          "name": "power",
+          "type": "number",
+          "title": {
+            "en": "L1 Power Drawn (kW)",
+            "nl": "L1 Power afname (kW)",
+            "sv": "L1 Effekt uttagen (kW)"
+          },
+          "example": 8.41
+        }
+      ]
+    },
+	{
+      "id": "changedCurrentL1",
+      "title": {
+        "en": "L1 Current drawn changed (A)",
+        "nl": "L1 Stroom afname gewijzigd (A)",
+        "sv": "L1 Strom uttagen ändrad (A)"
+      },
+      "titleFormatted": {
+        "en": "L1 Current drawn changed to [[current]]A",
+        "sv": "L1 Effekt uttagen ändrades till [[current]]A"
+      },
+      "tokens": [
+        {
+          "name": "current",
+          "type": "number",
+          "title": {
+            "en": "L1 Current Drawn (A)",
+            "nl": "L1 Stroom afname (A)",
+            "sv": "L1 Strom uttagen (A)"
+          },
+          "example": 16
+        }
+      ]
+    },
+	{
+      "id": "changedChargerLimit",
+      "title": {
+        "en": "Charge current limit changed (A)",
+        "nl": "Charge current limit changed (A)",
+        "sv": "Charge current limit changed (A)"
+      },
+      "titleFormatted": {
+        "en": "Charge current limit changed [[current]]A",
+        "sv": "Charge current limit changed [[current]]A"
+      },
+      "tokens": [
+        {
+          "name": "current",
+          "type": "number",
+          "title": {
+            "en": "Charge current limit (A)",
+            "nl": "Charge current limit (A)",
+            "sv": "Charge current limit (A)"
+          },
+          "example": 32
+        }
+      ]
+    },
+	{
+      "id": "changedEV_capability",
+      "title": {
+        "en": "EV's current capability changed (A)",
+        "nl": "EV's current capability changed (A)",
+        "sv": "EV's current capability changed (A)"
+      },
+      "titleFormatted": {
+        "en": "EV's current capability changed [[current]]A",
+        "sv": "EV's current capability changed [[current]]A"
+      },
+      "tokens": [
+        {
+          "name": "current",
+          "type": "number",
+          "title": {
+            "en": "EV's current limit (A)",
+            "nl": "EV's current limit (A)",
+            "sv": "EV's current limit (A)"
+          },
+          "example": 16
+        }
+      ]
+    },
+	{
+      "id": "changedYield",
+      "title": {
+        "en": "Energy yield changed to (kWh)",
+        "nl": "Energy yield changed to (kWh)",
+        "sv": "Energy yield changed to (kWh)"
+      },
+      "titleFormatted": {
+        "en": "Energy yield changed to [[yield]]kWh",
+        "sv": "Energy yield changed to  [[yield]]kWh"
+      },
+      "tokens": [
+        {
+          "name": "yield",
+          "type": "number",
+          "title": {
+            "en": "Energy yield (kWh)",
+            "nl": "Energy yield (kWh)",
+            "sv": "Energy yield(kWh)"
+          },
+          "example": 1021
+        }
+      ]
+    },
+    {
+      "id": "changedSessionYield",
+      "title": {
+        "en": "Session yield changed (kWh)",
+        "nl": "Sessie energie gewijzigd (kWh)",
+        "sv": "Session yield ändrad (kWh)"
+      },
+      "titleFormatted": {
+        "en": "Session charged energy changed to [[energy]]kWh",
+        "sv": "Session laddning ändrades till [[energy]]kWh"
+      },
+      "tokens": [
+        {
+          "name": "energy",
+          "type": "number",
+          "title": {
+            "en": "Session energy (kWh)",
+            "nl": "Sessie energie (kWh)",
+            "sv": "Session energy (kWh)"
+          },
+          "example": 42
+        }
+      ]
+    },
+    {
+      "id": "changedRequiredEnergy",
+      "title": {
+        "en": "EV required energy changed (kWh)",
+        "nl": "EV gevraagde energie gewijzigd (kWh)",
+        "sv": "EV required energie ändrad (kWh)"
+      },
+      "titleFormatted": {
+        "en": "EV required energt has changed to [[energy]]kWh",
+        "sv": "EV required energt has ändrades till [[energy]]kWh"
+      },
+      "tokens": [
+        {
+          "name": "energy",
+          "type": "number",
+          "title": {
+            "en": "Required energy (kWh)",
+            "nl": "Required energie (kWh)",
+            "sv": "Required energy (kWh)"
+          },
+          "example": 42
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    
+  ]
+}

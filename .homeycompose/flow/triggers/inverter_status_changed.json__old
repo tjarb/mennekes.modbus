@@ -1,0 +1,33 @@
+{
+    "id": "charger_status_changed",
+    "title": {
+        "en": "Operational Status Changed",
+        "nl": "Operationele status gewijzigd",
+        "sv": "Operationell status ändrad"
+    },
+    "titleFormatted": {
+        "en": "Operational status changed to [[charger_status]]",
+        "sv": "Operationell status ändrades till [[charger_status]]"
+    },
+    "tokens": [
+        {
+            "name": "charger_status",
+            "type": "string",
+            "title": {
+                "en": "Operational Status",
+                "nl": "Operationele status",
+                "sv": "Operationell status"
+            },
+            "example": {
+                "en": "Occupied"
+            }
+        }
+    ],
+    "args": [
+      {
+        "type": "device",
+        "name": "device",
+        "filter": "driver_id=inverter"
+      }
+    ]
+}
