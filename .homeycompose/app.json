@@ -1,7 +1,9 @@
 {
   "id": "mennekes.modbus",
   "sdk": 3,
+
   "version": "0.1.2",
+
   "compatibility": ">=5.0.0",
   "name": {
     "en": "Mennekes Amtron"
@@ -37,4 +39,6 @@
   "dependencies": {
     "net": "*"
   }
+
 }
+
