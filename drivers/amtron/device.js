@@ -336,6 +336,7 @@ class MennekesModbusStorageDevice extends Device {
 			
 			// Adjust active power to be <= max power			
 			let current = parseInt(args.current);
+
 				current = Math.min(32, current);				
 				current = Math.max( 0, current);
 				
