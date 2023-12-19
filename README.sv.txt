@@ -1,1 +1,0 @@
-This is the Modbus interface for Mennekes Amtron EV chargers

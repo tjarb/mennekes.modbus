@@ -15,16 +15,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ricott/mennekes.modbus.git"
+    "url": "git+https://github.com/tjarb/mennekes.modbus.git"
   },
   "keywords": [
     "mennekes",
-    "Amtron"
+    "Amtron",
+	"charger"
   ],
-  "author": "Tjarco Boerkoel",
+  "author": "tjarb",
   "license": "MIT",
   "bugs": {
-    "url": "TODO"
+    "url": "https://github.com/tjarb/mennekes.modbus/issues"
   },
-  "homepage": "TODO"
+  "homepage": "https://github.com/tjarb/mennekes.modbus"
 }

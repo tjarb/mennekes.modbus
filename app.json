@@ -8,160 +8,63 @@
     "en": "Mennekes Amtron"
   },
   "description": {
-    "en": "My car. My energy."
+    "en": "My power conection."
   },
   "category": "energy",
   "tags": {
     "en": [
       "mennekes",
       "charger",
-      "pv",
+      "electric vehicles",
       "energy",
       "modbus"
     ]
   },
   "author": {
-    "name": "Tjarco Boerkoel",
-    "email": "TODO"
+    "name": "tjarb"
   },
-  "contributors": {
-    "developers": [
-      {
-        "name": "Tjarco Boerkoel",
-        "email": "TODO"
-      }
-    ]
-  },
-  "contributing": {
-    "donate": {
-      "paypal": {
-        "username": "TODO"
-      }
-    }
-  },
+  "contributors": {},
   "bugs": {
-    "url": "https://TODO"
+    "url": "https://github.com/tjarb/mennekes.modbus/issues"
   },
-  "source": "https://TODO",
-  "homeyCommunityTopicId": 0,
+  "source": "https://github.com/tjarb/mennekes.modbus",
+  "homeyCommunityTopicId": 98346,
   "images": {
+    "xlarge": "./assets/images/xlarge.png",
     "large": "./assets/images/large.png",
     "small": "./assets/images/small.png"
   },
-  "brandColor": "#015a93",
+  "brandColor": "#62a3cc",
   "dependencies": {
     "net": "*"
   },
   "flow": {
-    "triggers": [
+    "actions": [
       {
-        "id": "charger_condition_changed",
+        "id": "set_target_current",
         "title": {
-          "en": "Condition changed",
-          "nl": "Staat gewijzigd",
-          "sv": "Tillstånd ändrad"
+          "en": "Limit the active carger current",
+          "sv": "Begränsa den aktiva strom"
         },
         "titleFormatted": {
-          "en": "Condition changed to [[charger_condition]]",
-          "sv": "Tillstånd ändrades till [[charger_condition]]"
-        },
-        "tokens": [
-          {
-            "name": "charger_condition",
-            "type": "string",
-            "title": {
-              "en": "Condition",
-              "nl": "Staat",
-              "sv": "Tillstånd"
-            },
-            "example": {
-              "en": "Ok"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=inverter"
-          }
-        ]
-      },
-      {
-        "id": "charger_status_changed",
-        "title": {
-          "en": "Operational Status Changed",
-          "nl": "Operationele status gewijzigd",
-          "sv": "Operationell status ändrad"
-        },
-        "titleFormatted": {
-          "en": "Operational status changed to [[charger_status]]",
-          "sv": "Operationell status ändrades till [[charger_status]]"
-        },
-        "tokens": [
-          {
-            "name": "charger_status",
-            "type": "string",
-            "title": {
-              "en": "Operational Status",
-              "nl": "Operationele status",
-              "sv": "Operationell status"
-            },
-            "example": {
-              "en": "Occupied"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=inverter"
-          }
-        ]
-      },
-      {
-        "id": "phase_threshold_triggered",
-        "title": {
-          "en": "Phase utilization alert",
-          "sv": "Fasöverbelastning"
-        },
-        "titleFormatted": {
-          "en": "Phase [[phase]] is utilized to [[percentageUtilized]]%",
-          "sv": "Fas [[phase]] är utnyttjad till [[percentageUtilized]]%"
+          "en": "Limit the active current to current [[current]]",
+          "sv": "Begränsa den aktiva strom till current [[current]]"
         },
         "args": [
           {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=energy"
-          }
-        ],
-        "tokens": [
-          {
-            "name": "phase",
-            "type": "string",
-            "title": {
-              "en": "Phase",
-              "sv": "Fas"
-            },
-            "example": {
-              "en": "L1"
-            }
-          },
-          {
-            "name": "percentageUtilized",
+            "name": "current",
             "type": "number",
             "title": {
-              "en": "Utilized (%)",
-              "sv": "Utnyttjad (%)"
+              "en": "current (A)",
+              "sv": "current (A)"
             },
-            "example": {
-              "en": "98"
-            }
+            "min": 0,
+            "max": 32
           }
         ]
-      },
+      }
+    ],
+    "triggers": [
       {
         "id": "changedOperationalStatus",
         "title": {
@@ -318,7 +221,7 @@
         ]
       },
       {
-        "id": "changedCurrentLimit",
+        "id": "changedChargerLimit",
         "title": {
           "en": "Charge current limit changed (A)",
           "nl": "Charge current limit changed (A)",
@@ -337,7 +240,38 @@
               "nl": "Charge current limit (A)",
               "sv": "Charge current limit (A)"
             },
-            "example": 31
+            "example": 32
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=amtron"
+          }
+        ]
+      },
+      {
+        "id": "changedEV_capability",
+        "title": {
+          "en": "EV's current capability changed (A)",
+          "nl": "EV's current capability changed (A)",
+          "sv": "EV's current capability changed (A)"
+        },
+        "titleFormatted": {
+          "en": "EV's current capability changed [[current]]A",
+          "sv": "EV's current capability changed [[current]]A"
+        },
+        "tokens": [
+          {
+            "name": "current",
+            "type": "number",
+            "title": {
+              "en": "EV's current limit (A)",
+              "nl": "EV's current limit (A)",
+              "sv": "EV's current limit (A)"
+            },
+            "example": 16
           }
         ],
         "args": [
@@ -441,257 +375,6 @@
           }
         ]
       }
-    ],
-    "conditions": [
-      {
-        "id": "anyPhaseUtilized",
-        "title": {
-          "en": "Any phase utilized !{{above|below}}",
-          "sv": "Någon fas är utnyttjad !{{över|under}}"
-        },
-        "titleFormatted": {
-          "en": "Any phase is utilized !{{above|below}} [[utilization]]%",
-          "sv": "Någon fas är utnyttjad !{{över|under}} [[utilization]]%"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=energy"
-          },
-          {
-            "name": "utilization",
-            "type": "number",
-            "title": {
-              "en": "Utilization (%)",
-              "sv": "Utnyttjad (%)"
-            }
-          }
-        ]
-      },
-      {
-        "id": "isInverterDailyYield",
-        "title": {
-          "en": "Daily yield is !{{|not}} above",
-          "sv": "Dagens produktion är !{{|inte}} mer än"
-        },
-        "titleFormatted": {
-          "en": "Daily yield is !{{|not}} above [[daily_yield]]",
-          "sv": "Dagens produktion är !{{|inte}} mer än [[daily_yield]]"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=inverter"
-          },
-          {
-            "name": "daily_yield",
-            "type": "number",
-            "title": {
-              "en": "Daily yield (kWh)",
-              "sv": "Dagens produktion (kWh)"
-            }
-          }
-        ]
-      },
-      {
-        "id": "isInverterStatus",
-        "title": {
-          "en": "Operational status !{{contains|doesn't contain}}",
-          "sv": "Operationell status innehåller !{{|inte}}"
-        },
-        "titleFormatted": {
-          "en": "Operational status !{{contains|doesn't contain}} [[inverter_status]]",
-          "sv": "Operationell status innehåller !{{|inte}} [[inverter_status]]"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=inverter"
-          },
-          {
-            "name": "inverter_status",
-            "type": "text",
-            "title": {
-              "en": "Operational status",
-              "sv": "Operationell status"
-            }
-          }
-        ]
-      },
-      {
-        "id": "phaseUtilized",
-        "title": {
-          "en": "A phase utilized !{{above|below}}",
-          "sv": "En fas är utnyttjad !{{över|under}}"
-        },
-        "titleFormatted": {
-          "en": "Phase [[phase]] is utilized !{{above|below}} [[utilization]]%",
-          "sv": "Fas [[phase]] är utnyttjad !{{över|under}} [[utilization]]%"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=energy"
-          },
-          {
-            "name": "phase",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "L1",
-                "label": {
-                  "en": "L1",
-                  "sv": "L1"
-                }
-              },
-              {
-                "id": "L2",
-                "label": {
-                  "en": "L2",
-                  "sv": "L2"
-                }
-              },
-              {
-                "id": "L3",
-                "label": {
-                  "en": "L3",
-                  "sv": "L3"
-                }
-              }
-            ]
-          },
-          {
-            "name": "utilization",
-            "type": "number",
-            "title": {
-              "en": "Utilization (%)",
-              "sv": "Utnyttjad (%)"
-            }
-          }
-        ]
-      },
-      {
-        "id": "power_condition",
-        "title": {
-          "en": "Power is !{{below|above}}",
-          "sv": "Effekt är !{{under|över}}"
-        },
-        "titleFormatted": {
-          "en": "Power is !{{below|above}} [[power]]",
-          "sv": "Effekt är !{{under|över}} [[power]]"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=inverter"
-          },
-          {
-            "name": "power",
-            "type": "number",
-            "title": {
-              "en": "Power (W)",
-              "sv": "Effekt (W)"
-            }
-          }
-        ]
-      },
-      {
-        "id": "isOperationalStatus",
-        "title": {
-          "en": "Operational status !{{is|is not}}",
-          "nl": "Operationele status !{{is|is niet}}",
-          "sv": "Operationell status !{{är|är inte}}"
-        },
-        "titleFormatted": {
-          "en": "Operational status !{{is|is not}} [[status]]",
-          "nl": "Operationele status !{{is|is niet}} [[status]]",
-          "sv": "Operationell status !{{är|är inte}} [[status]]"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=amtron"
-          },
-          {
-            "name": "status",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "303",
-                "label": {
-                  "en": "Off",
-                  "nl": "Uit",
-                  "sv": "Off"
-                }
-              },
-              {
-                "id": "2291",
-                "label": {
-                  "en": "Battery Standby",
-                  "nl": "Batterij standby",
-                  "sv": "Batteri standby"
-                }
-              },
-              {
-                "id": "2292",
-                "label": {
-                  "en": "Battery Charging",
-                  "nl": "Batterij opladen",
-                  "sv": "Batteri laddas"
-                }
-              },
-              {
-                "id": "2293",
-                "label": {
-                  "en": "Battery Discharging",
-                  "nl": "Batterij ontladen",
-                  "sv": "Batteri urladdas"
-                }
-              },
-              {
-                "id": "16777213",
-                "label": {
-                  "en": "Information Not Available",
-                  "nl": "Informatie Niet Beschikbaar",
-                  "sv": "Information inte tillgänglig"
-                }
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "actions": [
-      {
-        "id": "set_target_current",
-        "title": {
-          "en": "Limit the active carger current",
-          "sv": "Begränsa den aktiva strom"
-        },
-        "titleFormatted": {
-          "en": "Limit the active current to current [[current]]",
-          "sv": "Begränsa den aktiva strom till current [[current]]"
-        },
-        "args": [
-          {
-            "name": "current",
-            "type": "number",
-            "title": {
-              "en": "current (A)",
-              "sv": "current (A)"
-            },
-            "min": 6,
-            "max": 32,
-            "step": 0.5
-          }
-        ]
-      }
     ]
   },
   "drivers": [
@@ -701,11 +384,14 @@
         "nl": "Mennekes Amtron",
         "sv": "Mennekes Amtron"
       },
+      "platforms": [
+        "local"
+      ],
       "images": {
         "large": "drivers/amtron/assets/images/large.png",
         "small": "drivers/amtron/assets/images/small.png"
       },
-      "class": "sensor",
+      "class": "other",
       "capabilities": [
         "operational_status",
         "meter_power.required",
@@ -713,7 +399,8 @@
         "measure_power.L1",
         "measure_voltage.L1",
         "measure_current.L1",
-        "measure_current.limit",
+        "measure_current.ChargerLimit",
+        "measure_current.EV_capability",
         "meter_power.session",
         "meter_power.total"
       ],
@@ -753,6 +440,20 @@
             "en": "L1 voltage",
             "nl": "L1 voltage",
             "sv": "L1 voltage"
+          }
+        },
+        "measure_current.ChargerLimit": {
+          "title": {
+            "en": "Limit",
+            "nl": "Limiet",
+            "sv": "Limit"
+          }
+        },
+        "measure_current.EV_capability": {
+          "title": {
+            "en": "EV's capability",
+            "nl": "EV's capability",
+            "sv": "EV's capability"
           }
         },
         "meter_power.total": {
@@ -827,104 +528,6 @@
     }
   ],
   "capabilities": {
-    "battery": {
-      "type": "number",
-      "title": {
-        "en": "Session Charged",
-        "nl": "Sessie geladen",
-        "sv": "Batteriladdning"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/battery.svg",
-      "units": {
-        "en": "kWh",
-        "nl": "kWh",
-        "sv": "kWh"
-      }
-    },
-    "battery_capacity": {
-      "type": "number",
-      "title": {
-        "en": "Energy required",
-        "nl": "Energy required",
-        "sv": "Energy required"
-      },
-      "insights": true,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/battery_capacity.svg",
-      "units": {
-        "en": "kWh",
-        "nl": "kWh",
-        "sv": "kWh"
-      }
-    },
-    "charge_current": {
-      "type": "number",
-      "title": {
-        "en": "Charge current",
-        "nl": "Laad stroom",
-        "sv": "Cahrge current"
-      },
-      "insights": true,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/battery_capacity.svg",
-      "units": {
-        "en": "A",
-        "nl": "A",
-        "sv": "A"
-      }
-    },
-    "charge_limit": {
-      "type": "number",
-      "title": {
-        "en": "Charge current limit",
-        "nl": "Laad stroom limiet",
-        "sv": "Cahrge current limit"
-      },
-      "insights": true,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/battery_capacity.svg",
-      "units": {
-        "en": "A",
-        "nl": "A",
-        "sv": "A"
-      }
-    },
-    "connected": {
-      "title": {
-        "en": "Connected",
-        "sv": "Uppkopplad"
-      },
-      "type": "boolean",
-      "getable": true,
-      "setable": false,
-      "icon": "/assets/connected.svg"
-    },
-    "measure_yield": {
-      "type": "number",
-      "title": {
-        "en": "Lifetime Yield",
-        "nl": "Totale opbrengst",
-        "sv": "Lifstid produktion"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/total_yield.svg",
-      "units": {
-        "en": "kWh",
-        "nl": "kWh",
-        "sv": "kWh"
-      }
-    },
     "operational_status": {
       "type": "string",
       "title": {
@@ -936,57 +539,6 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/operational_status.svg"
-    },
-    "power_drawn": {
-      "type": "number",
-      "title": {
-        "en": "Grid Power",
-        "nl": "Stroom afname",
-        "sv": "Effekt uttagen"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/power_drawn.svg",
-      "units": {
-        "en": "kW",
-        "nl": "kW",
-        "sv": "kW"
-      }
-    },
-    "power_grid": {
-      "type": "number",
-      "title": {
-        "en": "Grid power",
-        "sv": "Elnät"
-      },
-      "insights": false,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/grid.svg",
-      "units": {
-        "en": "kW",
-        "nl": "kW",
-        "sv": "kW"
-      }
-    },
-    "power_self": {
-      "type": "number",
-      "title": {
-        "en": "Consumption",
-        "sv": "Konsumtion"
-      },
-      "insights": false,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/house.svg",
-      "units": {
-        "en": "W",
-        "nl": "W",
-        "sv": "W"
-      }
     },
     "target_power": {
       "title": {

@@ -21,7 +21,8 @@ class MennekesModbusStorageDevice extends Device {
         self._changedCurrent_L1 = self.homey.flow.getDeviceTriggerCard('changedCurrentL1');
 		self._changedPower_L1 = self.homey.flow.getDeviceTriggerCard('changedPowerL1');
 		self._changedVoltage_L1 = self.homey.flow.getDeviceTriggerCard('changedVoltageL1');
-		self._changedCurrentLimit = self.homey.flow.getDeviceTriggerCard('changedCurrentLimit');
+		self._changedChargerLimit = self.homey.flow.getDeviceTriggerCard('changedChargerLimit');
+		self._changedEV_capability = self.homey.flow.getDeviceTriggerCard('changedEV_capability');
 		self._changedYield = self.homey.flow.getDeviceTriggerCard('changedYield');
         self._changedRequiredEnergy = self.homey.flow.getDeviceTriggerCard('changedRequiredEnergy');
 		
@@ -30,7 +31,7 @@ class MennekesModbusStorageDevice extends Device {
             'host': self.getSetting('address'),
             'port': self.getSetting('port'),
             'unitId': 1,
-            'timeout': 1000,
+            'timeout': 2000,
             'autoReconnect': true,
             'reconnectTimeout': self.getSetting('polling'),
             'logLabel': 'Mennekes Amtron',
@@ -131,14 +132,14 @@ class MennekesModbusStorageDevice extends Device {
 						
 						
 						 // current limit
-						if (self.getCapabilityValue('measure_current.limit') != current_limit) {
-							self.setCapabilityValue('measure_current.limit', current_limit)
+						if (self.getCapabilityValue('measure_current.ChargerLimit') != current_limit) {
+							self.setCapabilityValue('measure_current.ChargerLimit', current_limit)
 								.then(function () {
 
 									let tokens = {
 										current: current_limit
 									}
-									self._changedCurrentLimit.trigger(self, tokens, {}).catch(error => { self.error(error) });
+									self._changedChargerLimit.trigger(self, tokens, {}).catch(error => { self.error(error) });
 
 								}).catch(reason => {
 									self.error(reason);
@@ -186,8 +187,10 @@ class MennekesModbusStorageDevice extends Device {
 					self.log("Charger_curent_max "+Charger_curent_max);
 					
 					let EV_control_state = 								results[4].response._body._valuesAsArray[0]				;	//EV needs to support this
-					self.log("EV_control_state "+EV_control_state);
+					self.log("EV_control_state "+EV_control_state + " = " + self.EV_control_state_string(EV_control_state)  );
 			
+					
+					
 /*					let power_L1		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(6,8), 0, 0)	/1000	;//Power in L1 (kWh)
 					//self.log("power_L1 "+power_L1);
 					
@@ -302,7 +305,20 @@ class MennekesModbusStorageDevice extends Device {
                             });
                     }
 					
-					
+					 // total energy charger during lifetime
+                    if (self.getCapabilityValue('measure_current.EV_capability') != EV_capability) {
+                        self.setCapabilityValue('measure_current.EV_capability', EV_capability)
+                            .then(function () {
+
+                                let tokens = {
+                                    current: EV_capability
+                                }
+                                self._changedEV_capability.trigger(self, tokens, {}).catch(error => { self.error(error) });
+
+                            }).catch(reason => {
+                                self.error(reason);
+                            });
+                    }
 					
 					
 
@@ -320,11 +336,15 @@ class MennekesModbusStorageDevice extends Device {
 			
 			// Adjust active power to be <= max power			
 			let current = args.current;
-				current = Math.min(32, current);
-				current = Math.max( 6, current);
+				current = Math.min(32, current);				
+				current = Math.max( 0, current);
 				
+				/*If current is lower than lowest threshold of charger, make it ZERO to pause charging*/		
+				if(current < 6){
+					current = 0;
+					self.log(">> Charging is PAUSED <<");		
+				}
 				self.log("Write max current "+current);		
-
 				return client.writeSingleRegister(1000, current).then((result) => {
 					   self.log("                ... write_success");
 					  return Promise.resolve(true);
@@ -351,23 +371,11 @@ class MennekesModbusStorageDevice extends Device {
     }
 	
 	async setupCapabilityListeners() {
-		/*TODO: Enable and disable functionality, "pause"by setting charge current limit to ZERO*/
 		
-     /*   this.registerCapabilityListener('changedCurrent', async (current) => {
-            this.log(`Set active current limit to '${current}'`);
-            // Adjust active power to be <= max power
-            const activeCurrent = current;
-            await this.setMaxActiveCurrentOutput(activeCurrent)
-                .catch(reason => {
-                    let msg = `Failed to set active power limit! Reason: ${reason.message}`;
-                    this.error(msg);
-                    return Promise.reject(new Error(msg));
-                });
-        });
-	*/
+
     }
 	
-	
+	/*Info from Charger*/
 	operational_string(operational_code){
 		let state="";
 		switch(operational_code){						
@@ -384,7 +392,20 @@ class MennekesModbusStorageDevice extends Device {
 				default: state= 'Unknown';						
 			}
 		return state;
-	};				
+	}				
+	
+	/*Info directly from EV*/
+	EV_control_state_string(state){
+		switch(state){
+			case 1: return "Standby";
+			case 2: return "Vehicle detected";
+			case 3: return "Ready";
+			case 4: return "With ventilation";
+			case 5: return "No power";
+			case 6: return "Error";
+			default : return "Error";
+		}
+	}
 }
 
 module.exports = MennekesModbusStorageDevice;

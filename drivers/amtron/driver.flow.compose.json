@@ -22,7 +22,7 @@
           },
           "example": "Occupied"
         }
-      ]
+      ]  
     },
     {
       "id": "changedChargePower",
@@ -121,7 +121,7 @@
       ]
     },
 	{
-      "id": "changedCurrentLimit",
+      "id": "changedChargerLimit",
       "title": {
         "en": "Charge current limit changed (A)",
         "nl": "Charge current limit changed (A)",
@@ -140,10 +140,34 @@
             "nl": "Charge current limit (A)",
             "sv": "Charge current limit (A)"
           },
-          "example": 31
+          "example": 32
         }
       ]
-    },	
+    },
+	{
+      "id": "changedEV_capability",
+      "title": {
+        "en": "EV's current capability changed (A)",
+        "nl": "EV's current capability changed (A)",
+        "sv": "EV's current capability changed (A)"
+      },
+      "titleFormatted": {
+        "en": "EV's current capability changed [[current]]A",
+        "sv": "EV's current capability changed [[current]]A"
+      },
+      "tokens": [
+        {
+          "name": "current",
+          "type": "number",
+          "title": {
+            "en": "EV's current limit (A)",
+            "nl": "EV's current limit (A)",
+            "sv": "EV's current limit (A)"
+          },
+          "example": 16
+        }
+      ]
+    },
 	{
       "id": "changedYield",
       "title": {
@@ -218,66 +242,6 @@
     }
   ],
   "conditions": [
-    {
-      "id": "isOperationalStatus",
-      "title": {
-        "en": "Operational status !{{is|is not}}",
-        "nl": "Operationele status !{{is|is niet}}",
-        "sv": "Operationell status !{{är|är inte}}"
-      },
-      "titleFormatted": {
-        "en": "Operational status !{{is|is not}} [[status]]",
-        "nl": "Operationele status !{{is|is niet}} [[status]]",
-        "sv": "Operationell status !{{är|är inte}} [[status]]"
-      },
-      "args": [
-        {
-          "name": "status",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "303",
-              "label": {
-                "en": "Off",
-                "nl": "Uit",
-                "sv": "Off"
-              }
-            },
-            {
-              "id": "2291",
-              "label": {
-                "en": "Battery Standby",
-                "nl": "Batterij standby",
-                "sv": "Batteri standby"
-              }
-            },
-            {
-              "id": "2292",
-              "label": {
-                "en": "Battery Charging",
-                "nl": "Batterij opladen",
-                "sv": "Batteri laddas"
-              }
-            },
-            {
-              "id": "2293",
-              "label": {
-                "en": "Battery Discharging",
-                "nl": "Batterij ontladen",
-                "sv": "Batteri urladdas"
-              }
-            },
-            {
-              "id": "16777213",
-              "label": {
-                "en": "Information Not Available",
-                "nl": "Informatie Niet Beschikbaar",
-                "sv": "Information inte tillgänglig"
-              }
-            }
-          ]
-        }
-      ]
-    }
+    
   ]
 }

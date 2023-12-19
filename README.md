@@ -6,7 +6,7 @@ Mennekes Amtron
 
 
 ## Support topic
-For support please use the official support topic on the forum [here](https://todo).
+For support please use the official support topic on the forum 
 
 ### Enable modbus in your product
 Enable the modbus interface in the Mennekes Amtron EV charger and assign it a FIXED IP-address.

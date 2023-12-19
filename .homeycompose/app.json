@@ -7,47 +7,35 @@
     "en": "Mennekes Amtron"
   },
   "description": {
-    "en": "My car. My energy."
+    "en": "My power conection."
   },
   "category": "energy",
   "tags": {
     "en": [
       "mennekes",
 	  "charger",
-      "pv",
+	  "electric vehicles", 
       "energy",
       "modbus"
     ]
   },
   "author": {
-    "name": "Tjarco Boerkoel",
-    "email": "TODO"
+    "name": "tjarb"
   },
   "contributors": {
-    "developers": [
-      {
-        "name": "Tjarco Boerkoel",
-        "email": "TODO"
-      }
-    ]
-  },
-  "contributing": {
-    "donate": {
-      "paypal": {
-        "username": "TODO"
-      }
-    }
+    
   },
   "bugs": {
-    "url": "https://TODO"
+    "url": "https://github.com/tjarb/mennekes.modbus/issues"
   },
-  "source": "https://TODO",
-  "homeyCommunityTopicId": 0,
+  "source": "https://github.com/tjarb/mennekes.modbus",
+  "homeyCommunityTopicId": 98346,
   "images": {
-    "large": "./assets/images/large.png",
+    "xlarge": "./assets/images/xlarge.png",
+	"large": "./assets/images/large.png",
     "small": "./assets/images/small.png"
   },
-  "brandColor": "#015a93",
+  "brandColor": "#62a3cc",
   "dependencies": {
     "net": "*"
   }

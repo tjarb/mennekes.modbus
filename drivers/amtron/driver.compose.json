@@ -4,11 +4,14 @@
     "nl": "Mennekes Amtron",
     "sv": "Mennekes Amtron"
   },
+  "platforms": [
+        "local"
+    ],
   "images": {
     "large": "drivers/amtron/assets/images/large.png",
     "small": "drivers/amtron/assets/images/small.png"
   },
-  "class": "sensor",
+  "class": "other",
   "capabilities": [
     "operational_status",
 	"meter_power.required",
@@ -16,7 +19,8 @@
 	"measure_power.L1",
 	"measure_voltage.L1",
 	"measure_current.L1",
-	"measure_current.limit",
+	"measure_current.ChargerLimit",
+	"measure_current.EV_capability",
 	"meter_power.session",
 	"meter_power.total"
 	
@@ -59,6 +63,20 @@
         "sv": "L1 voltage"
       }	  
     },
+	"measure_current.ChargerLimit": {
+      "title": {
+        "en": "Limit",
+        "nl": "Limiet",
+        "sv": "Limit"
+      }
+	},
+	"measure_current.EV_capability": {
+      "title": {
+        "en": "EV's capability",
+        "nl": "EV's capability",
+        "sv": "EV's capability"
+      }
+	},
     "meter_power.total": {
       "title": {
         "en": "Lifetime total",
