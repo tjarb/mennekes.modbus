@@ -1,7 +1,7 @@
 {
   "id": "mennekes.modbus",
   "sdk": 3,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "compatibility": ">=5.0.0",
   "name": {
     "en": "Mennekes Amtron"
@@ -13,8 +13,8 @@
   "tags": {
     "en": [
       "mennekes",
-	  "charger",
-	  "electric vehicles", 
+      "charger",
+      "electric vehicles",
       "energy",
       "modbus"
     ]
@@ -22,9 +22,7 @@
   "author": {
     "name": "tjarb"
   },
-  "contributors": {
-    
-  },
+  "contributors": {},
   "bugs": {
     "url": "https://github.com/tjarb/mennekes.modbus/issues"
   },
@@ -32,7 +30,7 @@
   "homeyCommunityTopicId": 98346,
   "images": {
     "xlarge": "./assets/images/xlarge.png",
-	"large": "./assets/images/large.png",
+    "large": "./assets/images/large.png",
     "small": "./assets/images/small.png"
   },
   "brandColor": "#62a3cc",
