@@ -58,12 +58,12 @@ class MennekesModbusStorageDevice extends Device {
 					
 				]).then((results) => {
 						current_limit 	 = 									results[0].response._body._valuesAsArray[0]							;	//actual current limit in A, read back from the charger
-						self.log("current_limit " + current_limit	);
+						//					self.log("current_limit " + current_limit	);
 					
 						let power_L1		 = decodeData.decodeU32(		results[1].response._body._valuesAsArray.slice(6,8), 0, 0)	/1000	;//Power in L1 (kWh)
 						//self.log("power_L1 "+power_L1);
 						
-						let power_L2		 = decodeData.decodeU32(		results[1].response._body._valuesAsArray.slice(8,10), 0, 0)	/1000		;
+						let power_L2		 = decodeData.decodeU32(		results[1].response._body._valuesAsArray.slice(8,10), 0, 0)	/1.000		;
 						//self.log("power_L2 "+power_L2);
 						
 						let power_L3		 = decodeData.decodeU32(		results[1].response._body._valuesAsArray.slice(10,12), 0, 0)/1000			;
@@ -81,7 +81,7 @@ class MennekesModbusStorageDevice extends Device {
 						let tot_yield		 = decodeData.decodeU32(		results[1].response._body._valuesAsArray.slice(18,20), 0, 0) / 1000.0	;//Total energy in kWh
 						//self.log("tot_yield "+tot_yield);
 						
-						let tot_power		 = decodeData.decodeU32(		results[1].response._body._valuesAsArray.slice(20,22), 0, 0) /1000.0	;//Total charging energy in kW
+						let tot_power		 = decodeData.decodeU32(		results[1].response._body._valuesAsArray.slice(20,22), 0, 0) /1.0000	;//Total charging energy in kW
 						//self.log("tot_power "+tot_power);
 						
 						// MEASURE_POWER: MOMENTAL (total) CHARGING POWER
@@ -172,22 +172,22 @@ class MennekesModbusStorageDevice extends Device {
 					
 	
                     let EV_ID 			 = decodeData.decodeHexString(	results[1].response._body._valuesAsArray )				;		/*EV ID, to HEX string*/
-					self.log("EV_ID: "+EV_ID);
+//					self.log("EV_ID: "+EV_ID);
 					
 					let EV_capability	 = 								results[2].response._body._valuesAsArray[0]				;//Max Current info from EV
-					self.log("Car MAX current capability" + EV_capability);
+//					self.log("Car MAX current capability" + EV_capability);
 					
 					let session_yield		 = decodeData.decodeU32(	results[2].response._body._valuesAsArray.slice(1,3), 0, 0)	/1000		;//session charged energy (kWh)
-					self.log("Session charged energy HiRes"+session_yield);
+//					self.log("Session charged energy HiRes"+session_yield);
 					
 					let session_duration =	 decodeData.decodeU32(		results[2].response._body._valuesAsArray.slice(3,5), 0, 0)	/60	;		//minutes
-					self.log("Session duration "+ session_duration);
+//					self.log("Session duration "+ session_duration);
 					
 					let Charger_curent_max	 = 							results[3].response._body._valuesAsArray[0]					;	//charger max current set by operator
-					self.log("Charger_curent_max "+Charger_curent_max);
+//					self.log("Charger_curent_max "+Charger_curent_max);
 					
 					let EV_control_state = 								results[4].response._body._valuesAsArray[0]				;	//EV needs to support this
-					self.log("EV_control_state "+EV_control_state + " = " + self.EV_control_state_string(EV_control_state)  );
+//					self.log("EV_control_state "+EV_control_state + " = " + self.EV_control_state_string(EV_control_state)  );
 			
 					
 					
@@ -223,7 +223,7 @@ class MennekesModbusStorageDevice extends Device {
 					let voltage_L3		 = decodeData.decodeU32(		results[5].response._body._valuesAsArray.slice(26,28), 0, 0)			;
 
 					let EV_Req_energy	 = decodeData.decodeU32(		results[6].response._body._valuesAsArray, 0, 0) /1000.0	;//Total charging energy in kW
-					self.log("EV_Req_energy "+EV_Req_energy);
+					//					self.log("EV_Req_energy "+EV_Req_energy);
 
                     // OPERATIONAL STATUS
 					let state = self.operational_string(operational_code);				
@@ -332,7 +332,7 @@ class MennekesModbusStorageDevice extends Device {
 		//set_target_current
 		const set_target_current = self.homey.flow.getActionCard('set_target_current');
 		set_target_current.registerRunListener(async (args) => {
-			self.log(`Action 'set_target_current' triggered with values: `+args.current );
+			//					self.log(`Action 'set_target_current' triggered with values: `+args.current );
 			
 			// Adjust active power to be <= max power			
 			let current = parseInt(args.current);
@@ -344,9 +344,9 @@ class MennekesModbusStorageDevice extends Device {
 					current = 0;
 					self.log(">> Charging is PAUSED <<");		
 				}
-				self.log("Write max current "+current);		
+				//					self.log("Write max current "+current);		
 				return client.writeSingleRegister(1000, current).then((result) => {
-					   self.log("                ... write_success");
+					   //					self.log("                ... write_success");
 					  return Promise.resolve(true);
 				  }).catch(reason => {
 				return Promise.reject(reason);
