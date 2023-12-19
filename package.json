@@ -1,7 +1,7 @@
 {
   "name": "mennekes.modbus",
   "version": "0.1.0",
-  "description": "Monitor mennekes Amtron over modbus protocol",
+  "description": "Monitor and control mennekes products",
   "main": "app.js",
   "dependencies": {
     "events": "^3.3.0",
@@ -20,7 +20,8 @@
   "keywords": [
     "mennekes",
     "Amtron",
-	"charger"
+	"charger",
+ "modbus"
   ],
   "author": "tjarb",
   "license": "MIT",
