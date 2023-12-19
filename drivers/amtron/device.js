@@ -335,7 +335,7 @@ class MennekesModbusStorageDevice extends Device {
 			self.log(`Action 'set_target_current' triggered with values: `+args.current );
 			
 			// Adjust active power to be <= max power			
-			let current = args.current;
+			let current = parseInt(args.current);
 				current = Math.min(32, current);				
 				current = Math.max( 0, current);
 				
