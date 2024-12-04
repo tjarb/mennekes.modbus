@@ -1,0 +1,52 @@
+{
+  "name": {
+    "en": "Mennekes Amtron (XTRA)",
+    "nl": "Mennekes Amtron (XTRA)",
+    "sv": "Mennekes Amtron (XTRA)"
+  },
+  "platforms": [
+        "local"
+    ],
+  "images": {
+    "large": "drivers/hcc3/assets/images/large.png",
+    "small": "drivers/hcc3/assets/images/small.png"
+  },
+  "class": "other",
+  "capabilities": [
+    "operational_status",
+    "measure_power.charge",
+	"measure_current.ChargerLimit",
+	"meter_power.session"
+	
+  ],
+  "capabilitiesOptions": {
+    
+    "measure_power.charge": {
+      "title": {
+        "en": "Charging",
+        "nl": "Laden",
+        "sv": "Laddning"
+      },
+	  "decimals": 0
+    },
+	"measure_current.ChargerLimit": {
+      "title": {
+        "en": "Limit",
+        "nl": "Limiet",
+        "sv": "Limit"
+      }
+	},	
+    "meter_power.session": {
+      "title": {
+        "en": "Session total",
+        "nl": "Sessie geladen",
+        "sv": "Session Laddning"
+      }	  
+    }
+  },
+   "pair": [
+    {
+      "id": "start"
+    }
+  ]
+}
